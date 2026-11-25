@@ -996,7 +996,7 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
   <text x="260" y="21" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#4A473E">Die-Cut Export Over-Sticker • 88 mm × 112 mm • ${esc(s.destinationMarketName)}</text>
   <rect x="20" y="30" width="480" height="${cardHeight}" rx="6" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
   <rect x="20" y="30" width="480" height="46" rx="4" fill="#141413" />
-  <text x="34" y="59" font-family="Newsreader, Georgia, serif" font-size="18" font-weight="700" fill="#FFFFFF">${esc(s.productName.slice(0, 42))}</text>
+  <text x="34" y="59" font-family="Newsreader, Georgia, serif" font-size="18" font-weight="700" fill="#FFFFFF">${esc(s.productName.slice(0, 34))}</text>
   <text x="486" y="59" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Net: ${esc(s.netContent)}</text>
 
   <text x="34" y="98" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#1D4268">${esc(s.originLine)} • ${esc(s.compliantClaims[0]?.slice(0, 46) || '')}</text>

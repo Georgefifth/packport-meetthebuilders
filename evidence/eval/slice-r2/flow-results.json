@@ -1,0 +1,259 @@
+{
+  "url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "checks": {
+    "check1": {
+      "pass": true,
+      "loadMs": 2555,
+      "pitchVisible": true,
+      "skuButtonsCount": 3,
+      "primaryCtaVisible": true,
+      "defaultScoreText": "12%\n— 7 fixes needed before export",
+      "stampText": "Hold: Relabel Required",
+      "consoleErrorsCount": 0,
+      "badRequestsCount": 0
+    },
+    "check3": {
+      "pass": true,
+      "count": 7,
+      "findingsDetails": [
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        },
+        {
+          "hasSeverityBadge": true,
+          "hasRegulation": true,
+          "hasFlaggedText": true,
+          "hasApplyBtn": true
+        }
+      ]
+    },
+    "check2": {
+      "pass": true,
+      "auStatus": 200,
+      "auScoreBefore": "12%\n— 6 fixes needed before export",
+      "auPinsCount": 5,
+      "jpStatus": 200,
+      "jpScoreBefore": "12%\n— 7 fixes needed before export",
+      "jpPinsCount": 6
+    },
+    "check4": {
+      "pass": true,
+      "scoreAfterOneFix": "12%\n— 6 fixes needed before export",
+      "scoreAfterAllFixes": "100%\n— Ready to print & ship (7 fixes applied)",
+      "stampAfterAllFixes": "Cleared for Export",
+      "ex1": {
+        "ex1HasTspanBold": true,
+        "ex1HasIns621": true,
+        "ex1HasIns211": true,
+        "ex1HasCompleteContains": true,
+        "ex1HasCompleteImporter": true,
+        "ex1HasCropMarks": true
+      },
+      "ex2": {
+        "ex2HasIns223": true,
+        "ex2HasIns102": true,
+        "ex2HasCompleteContains": true,
+        "ex2HasTspanBold": true,
+        "ex2HasCompleteImporter": true
+      },
+      "ex3": {
+        "ex3HasCompleteContains": true,
+        "ex3HasTspanBold": true,
+        "ex3HasCompleteImporter": true
+      }
+    },
+    "check5": {
+      "pass": true,
+      "has60gSugarPer100g": true,
+      "customSvgHasBoldTspan": true,
+      "customSvgHasIns223": true,
+      "customSvgHasIns102": true
+    },
+    "check6": {
+      "pass": true,
+      "downloadFilename": "bali-crispy-prawn-candlenut-sambal-au_fsanz.svg",
+      "downloadBanner": "Downloaded compliant over-sticker SVG.",
+      "copyBanner": "Copied customs dossier to clipboard."
+    },
+    "edge1": {
+      "pass": true,
+      "emptyStateVisible": true,
+      "emptyStateText": "Workbench Ready for Label Inspection\n\nEnter your product's ingredients and nutrition values on the left, or click one of the 3 Example APAC SKUs above to run an instant inspection.\n\nLoad Example: Bali Crispy Prawn Sambal → Singapore (SFA)\nLoad Example: Chiang Mai Mango Drink → Australia (FSANZ)\nLoad Example: Saigon Matcha Oat Bar → Japan (CAA)",
+      "rightPanelHeadingAfterClear": "2. Customs Proof (Singapore (SFA))",
+      "leftMarketAfterClear": "SG_SFA"
+    },
+    "edge2": {
+      "pass": true,
+      "ingredientErrorText": "Please enter at least one ingredient on the label.",
+      "activeIdAfterIngredientError": "ingredient-list",
+      "productNamePreserved": "Bali Crispy Prawn & Candlenut Sambal",
+      "servingErrorOnApplyAll": "Serving size must be greater than 0g.",
+      "activeIdOnApplyAll": "serving-size",
+      "scoreWhileInvalid": "12%\n— 7 fixes needed before export",
+      "servingErrorOnSingleApply": "Serving size must be greater than 0g.",
+      "servingErrorOnRunZero": "Serving size must be greater than 0g.",
+      "activeIdOnRunZero": "serving-size",
+      "savedServingInStorage": 20,
+      "servingAfterReload": "20"
+    },
+    "edge3": {
+      "pass": true,
+      "fallbackBanner": "Completed inspection using the built-in statutory rule engine so your work is safe (simulated upstream fallback).",
+      "fallbackFindingsCount": 7
+    },
+    "check7": {
+      "pass": true,
+      "scrollWidth": 390,
+      "svgWidth": 334,
+      "svgFitsViewport": true
+    },
+    "check8": {
+      "pass": true,
+      "tabStops": [
+        {
+          "tag": "BUTTON",
+          "text": "Example: Bali Crispy Prawn Sambal → Singapore (SFA",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Example: Chiang Mai Mango Drink → Australia (FSANZ",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Example: Saigon Matcha Oat Bar → Japan (CAA)",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Clear Form",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "tag": "SELECT",
+          "text": "Singapore (SFA)\nAustralia (FSANZ)\nJapan (CAA)",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "tag": "INPUT",
+          "text": "origin-country",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        }
+      ],
+      "marketAfterEnter": "AU_FSANZ"
+    }
+  },
+  "defectsRecheck": {
+    "defect4_storageKey": {
+      "storageKeys": [
+        "packport_history_v1"
+      ],
+      "hasPackportHistoryV1": true,
+      "hasOldPackportStateV1": false,
+      "pass": true
+    },
+    "defect3_fieldsetMargin": {
+      "fieldsetMarginTop": "16px",
+      "pass": true
+    },
+    "defect1_svg": {
+      "pass": true,
+      "scoreAfterOneFix": "12%\n— 6 fixes needed before export",
+      "scoreAfterAllFixes": "100%\n— Ready to print & ship (7 fixes applied)",
+      "stampAfterAllFixes": "Cleared for Export",
+      "ex1": {
+        "ex1HasTspanBold": true,
+        "ex1HasIns621": true,
+        "ex1HasIns211": true,
+        "ex1HasCompleteContains": true,
+        "ex1HasCompleteImporter": true,
+        "ex1HasCropMarks": true
+      },
+      "ex2": {
+        "ex2HasIns223": true,
+        "ex2HasIns102": true,
+        "ex2HasCompleteContains": true,
+        "ex2HasTspanBold": true,
+        "ex2HasCompleteImporter": true
+      },
+      "ex3": {
+        "ex3HasCompleteContains": true,
+        "ex3HasTspanBold": true,
+        "ex3HasCompleteImporter": true
+      }
+    },
+    "defect3_clearFormHeader": {
+      "rightPanelHeadingAfterClear": "2. Customs Proof (Singapore (SFA))",
+      "leftMarketAfterClear": "SG_SFA",
+      "pass": true
+    },
+    "defect2_invalidServing": {
+      "pass": true,
+      "ingredientErrorText": "Please enter at least one ingredient on the label.",
+      "activeIdAfterIngredientError": "ingredient-list",
+      "productNamePreserved": "Bali Crispy Prawn & Candlenut Sambal",
+      "servingErrorOnApplyAll": "Serving size must be greater than 0g.",
+      "activeIdOnApplyAll": "serving-size",
+      "scoreWhileInvalid": "12%\n— 7 fixes needed before export",
+      "servingErrorOnSingleApply": "Serving size must be greater than 0g.",
+      "servingErrorOnRunZero": "Serving size must be greater than 0g.",
+      "activeIdOnRunZero": "serving-size",
+      "savedServingInStorage": 20,
+      "servingAfterReload": "20"
+    }
+  },
+  "edgeProbes": {
+    "persistencePass": true,
+    "persistedName": "Surabaya Artisanal Tempeh Chips",
+    "persistedServing": "30",
+    "hugeInputOverflow": false
+  },
+  "consoleErrors": [],
+  "badRequests": []
+}
