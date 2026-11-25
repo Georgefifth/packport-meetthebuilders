@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Guard gates and linter configs",
+      "description": "Blocks edits to the gate scripts, hook scripts, evaluator, scoring anchors and linter configuration. Exit 2 returns the reason to the agent.",
+      "trigger": "PreToolUse",
+      "matcher": "^(fs_write|fs_append|str_replace|delete_file)$",
+      "action": { "type": "command", "command": "bash scripts/hooks/guard_gates.sh" }
+    }
+  ]
+}

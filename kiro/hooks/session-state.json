@@ -1,0 +1,11 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Load pipeline state",
+      "description": "Gives every new session STATE.md, project memory and any open post-mortems.",
+      "trigger": "SessionStart",
+      "action": { "type": "command", "command": "bash scripts/hooks/session_start.sh" }
+    }
+  ]
+}

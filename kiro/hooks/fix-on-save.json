@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Auto-fix JS/TS on save",
+      "description": "Runs fix_commands.js from project/config.json (for example vp check --fix).",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(ts|tsx|js|jsx|mjs|css|json)$",
+      "action": { "type": "command", "command": "bash scripts/hooks/fix_on_save.sh js" }
+    },
+    {
+      "name": "Auto-format Rust on save",
+      "description": "Runs fix_commands.rust from project/config.json (for example cargo fmt).",
+      "trigger": "PostFileSave",
+      "matcher": "\\.rs$",
+      "action": { "type": "command", "command": "bash scripts/hooks/fix_on_save.sh rust" }
+    }
+  ]
+}

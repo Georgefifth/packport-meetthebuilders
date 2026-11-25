@@ -1,0 +1,703 @@
+{
+  "_note": "Starting points, not templates. Pick one, then make it specific to the product. Fonts are on Google Fonts. Look up the real reference products before designing.",
+  "directions": [
+    {
+      "id": "field-notebook",
+      "name": "Field Notebook",
+      "mood": [
+        "warm",
+        "handmade",
+        "trustworthy"
+      ],
+      "themes": [
+        "education",
+        "health",
+        "research",
+        "community",
+        "journal",
+        "nonprofit",
+        "accessibility"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#F4EFE6",
+        "ink": "#1F1A17",
+        "accent": "#C8452D",
+        "secondary": "#4F6B4A",
+        "highlight": "#F2D16B",
+        "rule": "#D9D0BF"
+      },
+      "fonts": {
+        "display": "Fraunces",
+        "text": "Public Sans",
+        "data": "Courier Prime"
+      },
+      "layout": "Single reading column with a margin rail for notes. Results read like annotated pages, not panels.",
+      "signature": "Marginalia: short hand-style callouts attached to results with a thin leader line.",
+      "avoid": "Card grids, drop shadows, icon-in-circle bullets.",
+      "references": [
+        "Are.na",
+        "Readwise Reader",
+        "Bear notes"
+      ]
+    },
+    {
+      "id": "civic-ledger",
+      "name": "Civic Ledger",
+      "mood": [
+        "sober",
+        "precise",
+        "authoritative"
+      ],
+      "themes": [
+        "finance",
+        "audit",
+        "legal",
+        "news",
+        "civic",
+        "government",
+        "compliance",
+        "insurance"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#FAF8F3",
+        "ink": "#111111",
+        "accent": "#D7261E",
+        "secondary": "#2B4A6F",
+        "highlight": "#F3E3A1",
+        "rule": "#CFCABD"
+      },
+      "fonts": {
+        "display": "Newsreader",
+        "text": "Libre Franklin",
+        "data": "Libre Franklin"
+      },
+      "layout": "Ruled newspaper columns with a dateline. One dominant figure per screen, supporting detail in narrow columns.",
+      "signature": "Oversized tabular numerals with hairline rules and a red verdict stamp.",
+      "avoid": "Dashboards of equal tiles, gradient fills, rounded pills.",
+      "references": [
+        "The Pudding",
+        "FT Visual Vocabulary",
+        "ProPublica data pages"
+      ]
+    },
+    {
+      "id": "clinical-calm",
+      "name": "Clinical Calm",
+      "mood": [
+        "calm",
+        "clear",
+        "reassuring"
+      ],
+      "themes": [
+        "health",
+        "safety",
+        "accessibility",
+        "emergency",
+        "medical",
+        "wellbeing",
+        "elder"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#F7FAFA",
+        "ink": "#12303B",
+        "accent": "#0E7C86",
+        "secondary": "#E8A33D",
+        "highlight": "#D8EEF0",
+        "rule": "#CFE0E3"
+      },
+      "fonts": {
+        "display": "Atkinson Hyperlegible Next",
+        "text": "Atkinson Hyperlegible Next",
+        "data": "Atkinson Hyperlegible Mono"
+      },
+      "layout": "Large status banner on top, one clear next step below, details collapsed. Tap targets 48px or more.",
+      "signature": "A single plain-language status sentence at 28px+ that changes colour and wording with the result.",
+      "avoid": "Small grey text, dense tables, red-green only status.",
+      "references": [
+        "NHS digital service manual",
+        "Apple Health summary",
+        "One Medical app"
+      ]
+    },
+    {
+      "id": "workshop-orange",
+      "name": "Workshop Orange",
+      "mood": [
+        "rugged",
+        "practical",
+        "loud"
+      ],
+      "themes": [
+        "automotive",
+        "repair",
+        "hardware",
+        "logistics",
+        "construction",
+        "manufacturing",
+        "maintenance"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#EFEDE8",
+        "ink": "#1C1C1C",
+        "accent": "#FF5A1F",
+        "secondary": "#5B6770",
+        "highlight": "#FFD23F",
+        "rule": "#BDB8AD"
+      },
+      "fonts": {
+        "display": "Archivo",
+        "text": "Archivo",
+        "data": "JetBrains Mono"
+      },
+      "layout": "Big numeric readouts on a concrete-grey field, hazard-stripe dividers between stages, checklist-style steps.",
+      "signature": "Stencil section labels and a hazard-stripe bar that fills as the job progresses.",
+      "avoid": "Thin light fonts, pastel colours, soft shadows.",
+      "references": [
+        "Milwaukee Tool site",
+        "Carfax report",
+        "Procore"
+      ]
+    },
+    {
+      "id": "pastel-playground",
+      "name": "Pastel Playground",
+      "mood": [
+        "playful",
+        "friendly",
+        "bouncy"
+      ],
+      "themes": [
+        "kids",
+        "education",
+        "game",
+        "wellness",
+        "habit",
+        "family",
+        "social"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#FFF7E8",
+        "ink": "#2B2B3A",
+        "accent": "#FF6B57",
+        "secondary": "#5CB8FF",
+        "highlight": "#FFD23F",
+        "rule": "#F0E2C4",
+        "extra": "#6BCB77"
+      },
+      "fonts": {
+        "display": "Bricolage Grotesque",
+        "text": "Figtree",
+        "data": "Figtree"
+      },
+      "layout": "Chunky sticker-like blocks at slight angles, one big friendly action per screen, generous spacing.",
+      "signature": "Sticker buttons that squash on press and a mascot-free celebratory moment on success.",
+      "avoid": "Corporate blue, small type, dense forms.",
+      "references": [
+        "Duolingo",
+        "Headspace",
+        "Tiimo"
+      ]
+    },
+    {
+      "id": "museum-label",
+      "name": "Museum Label",
+      "mood": [
+        "quiet",
+        "curated",
+        "confident"
+      ],
+      "themes": [
+        "culture",
+        "archive",
+        "science",
+        "history",
+        "art",
+        "data story",
+        "explainer",
+        "museum"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#FFFFFF",
+        "ink": "#151515",
+        "accent": "#B7791F",
+        "secondary": "#6B6B6B",
+        "highlight": "#F3EBDD",
+        "rule": "#E6E6E6"
+      },
+      "fonts": {
+        "display": "Instrument Serif",
+        "text": "Hanken Grotesk",
+        "data": "Hanken Grotesk"
+      },
+      "layout": "Wide margins, objects shown large with small wall-label captions beside them, numbered plates.",
+      "signature": "Wall-label captions (title, year, one sentence) attached to every result.",
+      "avoid": "Colour fills, badges, tag clouds.",
+      "references": [
+        "Cooper Hewitt collection",
+        "Google Arts & Culture",
+        "Pentagram case studies"
+      ]
+    },
+    {
+      "id": "amber-terminal",
+      "name": "Amber Terminal",
+      "mood": [
+        "focused",
+        "technical",
+        "warm"
+      ],
+      "themes": [
+        "developer tool",
+        "cli",
+        "devtools",
+        "observability",
+        "security",
+        "infrastructure"
+      ],
+      "mode": "dark",
+      "palette": {
+        "paper": "#14110F",
+        "ink": "#F0E6D2",
+        "accent": "#FFB000",
+        "secondary": "#8A7F6B",
+        "highlight": "#3A2F1E",
+        "rule": "#2A241D",
+        "danger": "#FF5F56"
+      },
+      "fonts": {
+        "display": "JetBrains Mono",
+        "text": "Geist",
+        "data": "JetBrains Mono"
+      },
+      "layout": "Command-first: one input, streaming output, results as structured blocks. Mono only for code and data, a real text face for everything else.",
+      "signature": "Output blocks that show the exact command that produced them, with a copy button.",
+      "avoid": "Cyan on black, all-caps labels, fake telemetry, snake_case in the UI. Developer tools only.",
+      "references": [
+        "Warp",
+        "Linear",
+        "Charm CLI tools"
+      ],
+      "requires_why_dark": true
+    },
+    {
+      "id": "blueprint-light",
+      "name": "Blueprint Light",
+      "mood": [
+        "technical",
+        "airy",
+        "exact"
+      ],
+      "themes": [
+        "engineering",
+        "cad",
+        "maps",
+        "construction",
+        "architecture",
+        "hardware",
+        "science"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#EAF1F8",
+        "ink": "#1B3A6B",
+        "accent": "#E4572E",
+        "secondary": "#6D8DB5",
+        "highlight": "#FFFFFF",
+        "rule": "#C5D5E8"
+      },
+      "fonts": {
+        "display": "Chivo",
+        "text": "Chivo",
+        "data": "Chivo Mono"
+      },
+      "layout": "Drawing sheet: the work fills the canvas, tools sit in a slim title-block strip, annotations use dimension lines.",
+      "signature": "Dimension lines and numbered callouts drawn on top of the user's own content.",
+      "avoid": "Dark mode, glow, gradients.",
+      "references": [
+        "Onshape",
+        "Figma dev mode",
+        "Architectural drawing sheets"
+      ]
+    },
+    {
+      "id": "soft-utility",
+      "name": "Soft Utility",
+      "mood": [
+        "easy",
+        "friendly",
+        "one-handed"
+      ],
+      "themes": [
+        "consumer",
+        "budget",
+        "food",
+        "home",
+        "habit",
+        "shopping",
+        "travel",
+        "mobile"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#F6F3EE",
+        "ink": "#222222",
+        "accent": "#1F6F50",
+        "secondary": "#C98B3B",
+        "highlight": "#FFFFFF",
+        "rule": "#E3DDD2"
+      },
+      "fonts": {
+        "display": "DM Serif Display",
+        "text": "DM Sans",
+        "data": "DM Sans"
+      },
+      "layout": "Mobile-first: bottom sheet for the main action, thumb-reach controls, big readable numbers.",
+      "signature": "A single oversized number or answer at the top of every screen, with the explanation below it.",
+      "avoid": "Sidebars, tiny controls, hover-only interactions.",
+      "references": [
+        "Monzo",
+        "Airbnb trips",
+        "Things 3"
+      ]
+    },
+    {
+      "id": "riso-zine",
+      "name": "Risograph Zine",
+      "mood": [
+        "loud",
+        "handmade",
+        "joyful"
+      ],
+      "themes": [
+        "music",
+        "events",
+        "creative tool",
+        "community",
+        "art",
+        "zine",
+        "culture",
+        "social"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#F5EFE0",
+        "ink": "#2B2A33",
+        "accent": "#FF48B0",
+        "secondary": "#0078BF",
+        "highlight": "#FFE800",
+        "rule": "#2B2A33"
+      },
+      "fonts": {
+        "display": "Bagel Fat One",
+        "text": "Karla",
+        "data": "Space Mono"
+      },
+      "layout": "Two-colour overprint blocks with slight misregistration, collage spacing, stamp-style buttons.",
+      "signature": "Halftone shadows and an offset second colour on every headline.",
+      "avoid": "Gradients, subtle greys, glass.",
+      "references": [
+        "Risograph prints",
+        "Bandcamp",
+        "Are.na"
+      ]
+    },
+    {
+      "id": "swiss-signal",
+      "name": "Swiss Signal",
+      "mood": [
+        "rational",
+        "clean",
+        "fast"
+      ],
+      "themes": [
+        "analytics",
+        "data",
+        "dashboard",
+        "monitoring",
+        "finance",
+        "science",
+        "operations",
+        "report"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#F2F2F0",
+        "ink": "#0B0B0B",
+        "accent": "#00A86B",
+        "secondary": "#6A6A66",
+        "highlight": "#FFFFFF",
+        "rule": "#D4D4D0",
+        "danger": "#D6361F"
+      },
+      "fonts": {
+        "display": "Schibsted Grotesk",
+        "text": "Schibsted Grotesk",
+        "data": "Geist Mono"
+      },
+      "layout": "Strict grid, one metric per screen section, thin rules instead of boxes, tabular numerals.",
+      "signature": "One signal colour used only for the thing that needs attention, everything else in ink and grey.",
+      "avoid": "Rainbow charts, KPI card grids, drop shadows.",
+      "references": [
+        "Stripe docs",
+        "Observable",
+        "Bloomberg Businessweek graphics"
+      ]
+    },
+    {
+      "id": "night-market",
+      "name": "Night Market",
+      "mood": [
+        "warm",
+        "lively",
+        "rich"
+      ],
+      "themes": [
+        "food",
+        "travel",
+        "nightlife",
+        "culture",
+        "festival",
+        "local",
+        "marketplace"
+      ],
+      "mode": "dark",
+      "palette": {
+        "paper": "#1B1410",
+        "ink": "#F6E9D2",
+        "accent": "#E63B2E",
+        "secondary": "#2FA37A",
+        "highlight": "#E8B04A",
+        "rule": "#3A2A20"
+      },
+      "fonts": {
+        "display": "Gloock",
+        "text": "Hanken Grotesk",
+        "data": "Hanken Grotesk"
+      },
+      "layout": "Warm dark ground with paper-coloured cards cut like signs; photography or illustration leads.",
+      "signature": "Paper-cut layered headers with a soft lantern glow behind the primary action.",
+      "avoid": "Cyan, neon, mono type, cold greys.",
+      "references": [
+        "Resy",
+        "Atlas Obscura",
+        "Little Caesars-style posters"
+      ],
+      "requires_why_dark": true
+    },
+    {
+      "id": "penny-dreadful",
+      "name": "Penny Dreadful",
+      "mood": [
+        "gothic",
+        "theatrical",
+        "inky"
+      ],
+      "themes": [
+        "halloween",
+        "horror",
+        "spooky",
+        "storytelling",
+        "game",
+        "folklore",
+        "history",
+        "theme night"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#E9DFC8",
+        "ink": "#1A1411",
+        "accent": "#8E1B1B",
+        "secondary": "#5D7B3A",
+        "highlight": "#D6C79C",
+        "rule": "#1A1411"
+      },
+      "fonts": {
+        "display": "IM Fell English SC",
+        "text": "Libre Baskerville",
+        "data": "Special Elite"
+      },
+      "layout": "Broadsheet page with woodcut borders, engraved illustration blocks, ornamental dividers.",
+      "signature": "Woodcut frame around the main result and a wax-seal confirmation.",
+      "avoid": "Neon glows, pumpkin emoji, dripping-font clich\u00e9s.",
+      "references": [
+        "Victorian broadsides",
+        "Edward Gorey",
+        "Return of the Obra Dinn"
+      ]
+    },
+    {
+      "id": "greenhouse",
+      "name": "Greenhouse",
+      "mood": [
+        "organic",
+        "calm",
+        "hopeful"
+      ],
+      "themes": [
+        "climate",
+        "agriculture",
+        "sustainability",
+        "wellness",
+        "nature",
+        "food",
+        "energy",
+        "garden"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#EEF3E6",
+        "ink": "#17261C",
+        "accent": "#2F6B3A",
+        "secondary": "#C0714A",
+        "highlight": "#E9C46A",
+        "rule": "#CBD8BD"
+      },
+      "fonts": {
+        "display": "Young Serif",
+        "text": "Figtree",
+        "data": "Figtree"
+      },
+      "layout": "Soft sections divided by organic edges, line illustrations of plants as empty states, large calm numbers.",
+      "signature": "A small line-drawn plant that grows or wilts with the user's result.",
+      "avoid": "Stock leaf icons, neon green, harsh black.",
+      "references": [
+        "Pachama",
+        "Oatly site",
+        "Kinfolk"
+      ]
+    },
+    {
+      "id": "transit-signage",
+      "name": "Transit Signage",
+      "mood": [
+        "clear",
+        "urgent",
+        "public"
+      ],
+      "themes": [
+        "navigation",
+        "transport",
+        "emergency",
+        "logistics",
+        "civic",
+        "maps",
+        "safety",
+        "city"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#FFFFFF",
+        "ink": "#111111",
+        "accent": "#FFD100",
+        "secondary": "#0A5CAD",
+        "highlight": "#F2F2F2",
+        "rule": "#111111",
+        "danger": "#D6361F"
+      },
+      "fonts": {
+        "display": "Overpass",
+        "text": "Overpass",
+        "data": "Overpass Mono"
+      },
+      "layout": "Wayfinding signs: bold black-on-yellow headers, route lines connecting steps, big arrows for the next action.",
+      "signature": "A route line that runs down the page connecting each step, with a 'you are here' marker.",
+      "avoid": "Decorative type, soft colours, hidden navigation.",
+      "references": [
+        "NYC MTA signage",
+        "Citymapper",
+        "UK road signs"
+      ]
+    },
+    {
+      "id": "warm-workbench",
+      "name": "Warm Workbench",
+      "mood": [
+        "capable",
+        "focused",
+        "warm"
+      ],
+      "themes": [
+        "design tool",
+        "creative tool",
+        "editor",
+        "canvas",
+        "builder",
+        "generator",
+        "studio",
+        "no-code"
+      ],
+      "mode": "dark",
+      "palette": {
+        "paper": "#1B1815",
+        "ink": "#EDE7DF",
+        "accent": "#FF8A1F",
+        "secondary": "#8C8379",
+        "highlight": "#2A2521",
+        "rule": "#3A332D",
+        "danger": "#E5584B"
+      },
+      "fonts": {
+        "display": "Hanken Grotesk",
+        "text": "Hanken Grotesk",
+        "data": "Geist Mono"
+      },
+      "layout": "Pro-tool layout with a floating tool palette, a layers panel and an inspector, with the canvas dominant. Shortcut hints sit beside the tools.",
+      "signature": "One orange accent that only ever means 'selected' or 'primary action', and generated output designed in the same warm palette as the tool itself.",
+      "avoid": "Cyan or purple accents, glow, tiny labels, decorative panels. For real tools only; a tool that does not need a dark canvas should be light.",
+      "references": [
+        "Figma",
+        "Linear",
+        "Framer"
+      ],
+      "requires_why_dark": true
+    },
+    {
+      "id": "neo-brutal-play",
+      "name": "Neo-Brutal Play",
+      "mood": [
+        "chunky",
+        "friendly",
+        "loud"
+      ],
+      "themes": [
+        "game",
+        "pet",
+        "toy",
+        "social",
+        "consumer",
+        "kids",
+        "crypto",
+        "playful"
+      ],
+      "mode": "light",
+      "palette": {
+        "paper": "#FFF4D6",
+        "ink": "#111111",
+        "accent": "#FF5CA8",
+        "secondary": "#4D7CFF",
+        "highlight": "#FFD93D",
+        "rule": "#111111",
+        "extra": "#5BD16B"
+      },
+      "fonts": {
+        "display": "Dela Gothic One",
+        "text": "DM Sans",
+        "data": "DM Mono"
+      },
+      "layout": "Thick black outlines, hard offset shadows, flat saturated blocks, one character at the centre and big labelled buttons below it.",
+      "signature": "A hand-made character that reacts to every action, with segmented meters instead of thin progress bars.",
+      "avoid": "Emoji-only buttons with no label, soft shadows, gradients, low-contrast greys.",
+      "references": [
+        "Gumroad",
+        "Figma FigJam stickers",
+        "Tamagotchi"
+      ]
+    }
+  ]
+}

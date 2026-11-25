@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Clean-code gate at end of turn",
+      "description": "Runs quality_commands from project/config.json. If any fail, the agent is sent back to fix them once per turn.",
+      "trigger": "Stop",
+      "timeout": 600,
+      "action": { "type": "command", "command": "bash scripts/hooks/stop_gate.sh" }
+    }
+  ]
+}

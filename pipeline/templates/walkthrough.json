@@ -1,0 +1,10 @@
+{
+  "url": "https://your-live-app.example",
+  "viewport": { "width": 1920, "height": 1080 },
+  "steps": [
+    { "caption": "A mechanic quotes you $1,840. Is it fair?", "wait": 2500 },
+    { "caption": "Open the app. No account needed.", "wait": 1500 },
+    { "click": "text=Try an example", "caption": "One click loads a real example", "wait": 2500 },
+    { "screenshot": "result.png", "caption": "The verdict, in plain words", "wait": 3500 }
+  ]
+}

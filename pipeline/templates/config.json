@@ -1,0 +1,19 @@
+{
+  "hackathon_name": "",
+  "devpost_url": "",
+  "deadline_iso": "",
+  "video_max_seconds": 180,
+  "required_paths": ["LICENSE"],
+  "sponsor_tech": [],
+  "processes_user_input": false,
+  "quality_commands": [],
+  "fix_commands": { "js": [], "rust": [] },
+  "app_dir": ".",
+  "install": "npm install",
+  "build": "npm run build",
+  "test": "",
+  "start": "npm run dev",
+  "local_url": "http://localhost:5173",
+  "live_url": "",
+  "repo_url": ""
+}

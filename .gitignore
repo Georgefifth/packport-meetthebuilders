@@ -1,0 +1,25 @@
+node_modules/
+dist/
+build/
+.next/
+.venv/
+__pycache__/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.momen-mcp/
+.DS_Store
+scripts/browser/node_modules/
+evidence/probe*/
+demo/raw/
+# Third-party reference images in taste/ are for private calibration only
+taste/**/*.png
+taste/**/*.jpg
+taste/**/*.jpeg
+taste/**/*.gif
+taste/**/*.webp
+design/references/*.png
+design/references/*.jpg
+# Never ignore sponsor-required folders (check project/config.json required_paths), e.g. .kiro/

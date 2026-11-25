@@ -1,0 +1,12 @@
+Run the hackathon pipeline in this folder until it reaches a human gate or the submission package is ready.
+
+Loop:
+1. Read STATE.md. Read ONLY the stage file for the current stage: pipeline/stages/0<stage>-*.md. Load the skills that stage names.
+2. Do that stage's work.
+3. Run `python3 scripts/gate.py <stage>`.
+   - exit 0: set `stage` to the next number in STATE.md, add one log line, go to 1.
+   - exit 1: read the failed checks, fix the cause, run the gate again. Never edit scripts/gate.py, audit_claims.py or ui_lint.py, never weaken a contract or an evaluation to pass. If the same check fails 3 times with the same cause, write a post-mortem (pipeline/templates/postmortem.md), commit and stop. Before stopping for any reason, update the Handoff in STATE.md.
+   - exit 10: STOP. Tell the human exactly what they must decide or do (the gate prints it). Do not start the next stage.
+4. Evaluation is never done by you. Use /hack-review so the evaluator subagent grades in a fresh context.
+
+The goal is complete only when `python3 scripts/gate.py 7` exits 10 with only the human submit step remaining, or when a human gate is waiting. Completion evidence is the gate output, not your own statement.

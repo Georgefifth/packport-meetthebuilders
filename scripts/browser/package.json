@@ -1,0 +1,9 @@
+{
+  "name": "hackathon-pipeline-browser",
+  "private": true,
+  "type": "module",
+  "description": "Playwright helpers used by the evaluator and the demo recorder.",
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
