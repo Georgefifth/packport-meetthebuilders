@@ -49,6 +49,11 @@ describe('PackPort APAC Regulatory Rule Engine', () => {
     const svg = buildExportStickerSvgString(resolved);
     expect(svg).toContain('<svg');
     expect(svg).toContain('Cleared for Export');
+    expect(svg).toContain('INS 211');
+    expect(svg).toContain('INS 621');
+    expect(svg).toContain('Soybean');
+    expect(svg).toContain('Singapore 619736');
+    expect(svg).toContain('<tspan font-weight="700">');
   });
 
   it('flags Australia FSANZ PEAL allergen and Low Sugar violations on Chiang Mai Mango Drink', () => {

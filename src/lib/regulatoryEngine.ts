@@ -135,31 +135,31 @@ const APAC_ALLERGEN_LEXICON: AllergenEntry[] = [
     japanStatus: 'Recommended (21 Items)',
   },
   {
-    patterns: [/\bcashew\b/i, /\bcashews\b/i],
+    patterns: [/\bcashews?\b/i],
     canonicalName: 'Tree Nuts (Cashew)',
     pealName: 'cashew',
     japanStatus: 'Recommended (21 Items)',
   },
   {
-    patterns: [/\balmond\b/i, /\balmonds\b/i],
+    patterns: [/\balmonds?\b/i],
     canonicalName: 'Tree Nuts (Almond)',
     pealName: 'almond',
     japanStatus: 'Recommended (21 Items)',
   },
   {
-    patterns: [/\bwalnut\b/i, /\bwalnuts\b/i],
+    patterns: [/\bwalnuts?\b/i],
     canonicalName: 'Tree Nuts (Walnut)',
     pealName: 'walnut',
     japanStatus: 'Mandatory (Specific Raw Material)',
   },
   {
-    patterns: [/\bpeanut\b/i, /\bpeanuts\b/i, /\bkacang tanah\b/i, /\bgroundnut\b/i],
+    patterns: [/\bpeanuts?\b/i, /\bkacang tanah\b/i, /\bgroundnuts?\b/i],
     canonicalName: 'Peanuts',
     pealName: 'peanut',
     japanStatus: 'Mandatory (Specific Raw Material)',
   },
   {
-    patterns: [/\bkicap\b/i, /\bkecap\b/i, /\bsoy\b/i, /\bsoya\b/i, /\btofu\b/i, /\bmiso\b/i, /\bedamame\b/i],
+    patterns: [/\bkicap\b/i, /\bkecap\b/i, /\bsoya?\b/i, /\btofu\b/i, /\bmiso\b/i, /\bedamame\b/i],
     canonicalName: 'Soybean',
     pealName: 'soy',
     japanStatus: 'Recommended (21 Items)',
@@ -171,7 +171,7 @@ const APAC_ALLERGEN_LEXICON: AllergenEntry[] = [
     japanStatus: 'Mandatory (Specific Raw Material)',
   },
   {
-    patterns: [/\boat\b/i, /\boats\b/i, /\bbarley\b/i, /\brye\b/i],
+    patterns: [/\boats?\b/i, /\bbarley\b/i, /\brye\b/i],
     canonicalName: 'Cereals containing Gluten (Oats)',
     pealName: 'oats (gluten)',
     japanStatus: 'Recommended (21 Items)',
@@ -183,7 +183,7 @@ const APAC_ALLERGEN_LEXICON: AllergenEntry[] = [
     japanStatus: 'Mandatory (Specific Raw Material)',
   },
   {
-    patterns: [/\begg\b/i, /\btelur\b/i, /\balbumin\b/i, /\bmayonnaise\b/i],
+    patterns: [/\beggs?\b/i, /\btelur\b/i, /\balbumin\b/i, /\bmayonnaise\b/i],
     canonicalName: 'Egg',
     pealName: 'egg',
     japanStatus: 'Mandatory (Specific Raw Material)',
@@ -201,7 +201,7 @@ const APAC_ALLERGEN_LEXICON: AllergenEntry[] = [
     japanStatus: 'Recommended (21 Items)',
   },
   {
-    patterns: [/\bsodium metabisulfite\b/i, /\bsodium metabisulphite\b/i, /\bsulfite\b/i, /\bsulphite\b/i, /\bsulfur dioxide\b/i],
+    patterns: [/\bsodium metabisulfite\b/i, /\bsodium metabisulphite\b/i, /\bsulfites?\b/i, /\bsulphites?\b/i, /\bsulfur dioxide\b/i],
     canonicalName: 'Added Sulphites (>10 mg/kg)',
     pealName: 'sulphites',
     japanStatus: 'Recommended (21 Items)',
@@ -349,6 +349,118 @@ export function detectAdditives(ingredientList: string): MappedAdditive[] {
     }
   }
   return found;
+}
+
+function formatIngredientsWithAllergensAndAdditives(
+  rawIngredients: string,
+  applyAllergenBolding: boolean,
+  applyAdditiveMapping: boolean
+): { html: string; plain: string } {
+  let text = rawIngredients;
+
+  if (applyAdditiveMapping) {
+    for (const rule of ADDITIVE_RULES) {
+      const alreadyHasIns = new RegExp(rule.insNumber.replace(' ', '\\s*'), 'i').test(text);
+      if (!alreadyHasIns) {
+        text = text.replace(
+          rule.pattern,
+          `${rule.functionalClass} (${rule.insNumber}, ${rule.name})`
+        );
+      }
+    }
+  }
+
+  if (!applyAllergenBolding) {
+    return { html: text, plain: text };
+  }
+
+  // First translate Southeast Asian regional terms into plain English with bolded allergen tags
+  let html = text
+    .replace(
+      /\bbelacan\s*\(fermented shrimp paste\)/gi,
+      'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)'
+    )
+    .replace(
+      /\bbelacan\b/gi,
+      'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)'
+    )
+    .replace(
+      /\bkemiri\s*\(candlenut\)/gi,
+      'candlenut (<strong>Tree Nut: Candlenut</strong>)'
+    )
+    .replace(/\bkemiri\b/gi, 'candlenut (<strong>Tree Nut: Candlenut</strong>)')
+    .replace(
+      /\bkicap manis\s*\(sweet soy sauce\)/gi,
+      'sweet soy sauce (<strong>Soybean, Wheat</strong>)'
+    )
+    .replace(
+      /\bnam pla\s*\(fish sauce\)/gi,
+      'fish sauce (<strong>Fish</strong>)'
+    )
+    .replace(/\bnam pla\b/gi, 'fish sauce (<strong>Fish</strong>)');
+
+  // Now ensure every allergen term from APAC_ALLERGEN_LEXICON is wrapped in <strong> if not already inside <strong>
+  const generalAllergenTerms = [
+    'shrimp',
+    'prawn',
+    'crab',
+    'lobster',
+    'candlenut',
+    'cashews',
+    'cashew',
+    'almonds',
+    'almond',
+    'walnuts',
+    'walnut',
+    'peanuts',
+    'peanut',
+    'groundnuts',
+    'groundnut',
+    'soybean',
+    'soya',
+    'soy',
+    'tofu',
+    'miso',
+    'wheat',
+    'flour',
+    'oats',
+    'oat',
+    'barley',
+    'rye',
+    'whey',
+    'milk',
+    'dairy',
+    'casein',
+    'butter',
+    'cheese',
+    'eggs',
+    'egg',
+    'sesame',
+    'tahini',
+    'fish',
+    'anchovy',
+    'tuna',
+    'Sodium Metabisulphite',
+    'sodium metabisulfite',
+    'sodium metabisulphite',
+    'sulphites',
+    'sulfites',
+  ];
+
+  // Replace outside existing <strong>...</strong> blocks
+  for (const term of generalAllergenTerms) {
+    const parts = html.split(/(<strong>[\s\S]*?<\/strong>)/gi);
+    html = parts
+      .map((part) => {
+        if (part.toLowerCase().startsWith('<strong>')) return part;
+        const re = new RegExp(`\\b(${term})\\b`, 'gi');
+        return part.replace(re, '<strong>$1</strong>');
+      })
+      .join('');
+  }
+
+  const plain = html.replace(/<\/?strong>/gi, '');
+  return { html, plain };
 }
 
 export function inspectLabelDeterministic(
@@ -620,50 +732,24 @@ export function inspectLabelDeterministic(
     });
   }
 
-  // Build Remediated Over-Sticker Content
-  let formattedIngredientsHtml = input.ingredientList;
-  let formattedIngredientsPlain = input.ingredientList;
-
   const allergenFinding = findings.find((f) => f.id === 'finding-allergen-declaration');
   const additiveFinding = findings.find((f) => f.id === 'finding-ins-additives');
 
-  if (!allergenFinding || allergenFinding.resolved) {
-    formattedIngredientsHtml = formattedIngredientsHtml
-      .replace(/\bbelacan\s*\(fermented shrimp paste\)/gi, 'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)')
-      .replace(/\bbelacan\b/gi, 'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)')
-      .replace(/\bkemiri\s*\(candlenut\)/gi, 'candlenut (<strong>Tree Nut: Candlenut</strong>)')
-      .replace(/\bkemiri\b/gi, 'candlenut (<strong>Tree Nut: Candlenut</strong>)')
-      .replace(/\bkicap manis\s*\(sweet soy sauce\)/gi, 'sweet soy sauce (<strong>Soybean, Wheat</strong>)')
-      .replace(/\bcashew milk paste\b/gi, '<strong>Cashew</strong> milk paste (<strong>Tree Nut</strong>)')
-      .replace(/\broasted cashews\b/gi, 'roasted <strong>Cashews (Tree Nut)</strong>')
-      .replace(/\brolled oats\b/gi, 'rolled <strong>Oats (Gluten)</strong>')
-      .replace(/\bblack sesame seeds\b/gi, 'black <strong>Sesame</strong> seeds')
-      .replace(/\bwhey protein isolate\b/gi, '<strong>Whey</strong> protein isolate (<strong>Milk</strong>)')
-      .replace(/\bsoy lecithin\b/gi, '<strong>Soy</strong> lecithin')
-      .replace(/\begg white powder\b/gi, '<strong>Egg</strong> white powder');
+  const applyAllergenBolding = !allergenFinding || allergenFinding.resolved;
+  const applyAdditiveMapping = !additiveFinding || additiveFinding.resolved;
 
-    formattedIngredientsPlain = formattedIngredientsHtml.replace(/<\/?strong>/g, '');
-  }
+  const { html: formattedIngredientsHtml, plain: formattedIngredientsPlain } =
+    formatIngredientsWithAllergensAndAdditives(
+      input.ingredientList,
+      applyAllergenBolding,
+      applyAdditiveMapping
+    );
 
-  if (!additiveFinding || additiveFinding.resolved) {
-    for (const rule of ADDITIVE_RULES) {
-      formattedIngredientsHtml = formattedIngredientsHtml.replace(
-        rule.pattern,
-        `${rule.functionalClass} (${rule.insNumber}, ${rule.name})`
-      );
-      formattedIngredientsPlain = formattedIngredientsPlain.replace(
-        rule.pattern,
-        `${rule.functionalClass} (${rule.insNumber}, ${rule.name})`
-      );
-    }
-  }
-
-  const containsSummary =
-    !allergenFinding || allergenFinding.resolved
-      ? detectedAllergens.length > 0
-        ? `Contains: ${detectedAllergens.map((a) => a.canonicalName).join(', ')}.`
-        : 'Contains: No priority allergens declared.'
-      : input.containsStatement || 'Contains: No allergen summary declared on origin label.';
+  const containsSummary = applyAllergenBolding
+    ? detectedAllergens.length > 0
+      ? `Contains: ${detectedAllergens.map((a) => a.canonicalName).join(', ')}.`
+      : 'Contains: No priority allergens declared.'
+    : input.containsStatement || 'Contains: No allergen summary declared on origin label.';
 
   const unresolvedClaims = findings.filter(
     (f) => f.targetArea === 'claims' && !f.resolved
@@ -776,6 +862,59 @@ export function inspectLabelDeterministic(
   };
 }
 
+interface RichWord {
+  text: string;
+  bold: boolean;
+}
+
+function wrapRichHtmlToSvgLines(htmlInput: string, maxCharsPerLine: number): RichWord[][] {
+  const segments = htmlInput.split(/(<strong>[\s\S]*?<\/strong>)/gi).filter(Boolean);
+  const words: RichWord[] = [];
+  for (const seg of segments) {
+    const isBold = /^<strong>/i.test(seg);
+    const clean = seg.replace(/<\/?strong>/gi, '');
+    for (const token of clean.split(/\s+/).filter(Boolean)) {
+      words.push({ text: token, bold: isBold });
+    }
+  }
+
+  const lines: RichWord[][] = [];
+  let currentLine: RichWord[] = [];
+  let currentLen = 0;
+
+  for (const w of words) {
+    const addLen = (currentLine.length > 0 ? 1 : 0) + w.text.length;
+    if (currentLen + addLen > maxCharsPerLine && currentLine.length > 0) {
+      lines.push(currentLine);
+      currentLine = [w];
+      currentLen = w.text.length;
+    } else {
+      currentLine.push(w);
+      currentLen += addLen;
+    }
+  }
+  if (currentLine.length > 0) {
+    lines.push(currentLine);
+  }
+  return lines;
+}
+
+function wrapPlainLines(text: string, maxChars: number): string[] {
+  const words = text.split(/\s+/).filter(Boolean);
+  const lines: string[] = [];
+  let current = '';
+  for (const w of words) {
+    if ((current + ' ' + w).trim().length > maxChars) {
+      if (current) lines.push(current);
+      current = w;
+    } else {
+      current = (current + ' ' + w).trim();
+    }
+  }
+  if (current) lines.push(current);
+  return lines;
+}
+
 export function buildExportStickerSvgString(result: InspectionResult): string {
   const s = result.remediatedSticker;
   const esc = (str: string) =>
@@ -785,98 +924,137 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
 
-  const wrapLines = (text: string, maxChars: number): string[] => {
-    const words = text.split(/\s+/);
-    const lines: string[] = [];
-    let current = '';
-    for (const w of words) {
-      if ((current + ' ' + w).trim().length > maxChars) {
-        if (current) lines.push(current);
-        current = w;
-      } else {
-        current = (current + ' ' + w).trim();
-      }
-    }
-    if (current) lines.push(current);
-    return lines.slice(0, 4);
-  };
+  const richIngLines = wrapRichHtmlToSvgLines(
+    `<strong>Ingredients:</strong> ${s.formattedIngredientsHtml}`,
+    58
+  );
+  const containsLines = wrapPlainLines(s.containsSummary, 58);
+  const importerLines = wrapPlainLines(s.importerBlock, 60);
 
-  const ingLines = wrapLines(`Ingredients: ${s.formattedIngredientsPlain}`, 58);
+  const ingStartY = 128;
+  const ingLineHeight = 18;
+  const afterIngY = ingStartY + richIngLines.length * ingLineHeight + 6;
+
+  const containsBoxY = afterIngY;
+  const containsBoxHeight = Math.max(32, 14 + containsLines.length * 18);
+
+  const nutritionY = containsBoxY + containsBoxHeight + 12;
+  const nutritionHeight = 232;
+
+  const importerStartY = nutritionY + nutritionHeight + 22;
+  const storageY = importerStartY + importerLines.length * 18 + 4;
+  const stampY = storageY + 14;
+  const cardHeight = stampY + 58 - 30;
+  const svgHeight = cardHeight + 50;
+
   const stampColor =
     result.verdictStamp === 'Cleared for Export' ? '#1B6B3A' : '#C8281E';
   const stampBg =
     result.verdictStamp === 'Cleared for Export' ? '#E8F5ED' : '#FDF2F1';
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" width="520" height="620" role="img" aria-label="Print-ready export over-sticker for ${esc(s.productName)}">
-  <rect width="520" height="620" fill="#F2ECE1" />
-  <text x="260" y="21" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#4A473E">Die-Cut Export Over-Sticker • 88 mm × 112 mm • ${esc(s.destinationMarketName)}</text>
-  <rect x="20" y="30" width="480" height="570" rx="6" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
-  <rect x="20" y="30" width="480" height="46" rx="4" fill="#141413" />
-  <text x="34" y="59" font-family="Newsreader, Georgia, serif" font-size="18" font-weight="700" fill="#FFFFFF">${esc(s.productName.slice(0, 40))}</text>
-  <text x="486" y="59" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Net: ${esc(s.netContent)}</text>
+  const renderedIngLines = richIngLines
+    .map((line, idx) => {
+      const y = ingStartY + idx * ingLineHeight;
+      // Group consecutive words with the same bold status into a single run
+      const runs: { text: string; bold: boolean }[] = [];
+      for (const w of line) {
+        if (runs.length > 0 && runs[runs.length - 1].bold === w.bold) {
+          runs[runs.length - 1].text += ` ${w.text}`;
+        } else {
+          runs.push({ text: w.text, bold: w.bold });
+        }
+      }
+      const tspans = runs
+        .map(
+          (run, rIdx) =>
+            `<tspan${run.bold ? ' font-weight="700"' : ''}>${rIdx > 0 ? ' ' : ''}${esc(run.text)}</tspan>`
+        )
+        .join('');
+      return `<text x="34" y="${y}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#141413">${tspans}</text>`;
+    })
+    .join('\n  ');
 
-  <text x="34" y="98" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#1D4268">${esc(s.originLine)} • ${esc(s.compliantClaims[0]?.slice(0, 44) || '')}</text>
-  <line x1="34" y1="108" x2="486" y2="108" stroke="#D4CEC0" stroke-width="1" />
-
-  ${ingLines
+  const renderedContainsLines = containsLines
     .map(
       (line, idx) =>
-        `<text x="34" y="${128 + idx * 18}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#141413">${esc(line)}</text>`
+        `<text x="44" y="${containsBoxY + 21 + idx * 18}" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="700" fill="#141413">${esc(line)}</text>`
     )
-    .join('\n  ')}
+    .join('\n  ');
 
-  <rect x="34" y="200" width="452" height="32" rx="3" fill="#FAF7F0" stroke="#141413" stroke-width="1.5" />
-  <text x="44" y="221" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="700" fill="#141413">${esc(s.containsSummary.slice(0, 58))}</text>
+  const renderedImporterLines = importerLines
+    .map(
+      (line, idx) =>
+        `<text x="34" y="${importerStartY + idx * 18}" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#141413">${esc(line)}</text>`
+    )
+    .join('\n  ');
 
-  <rect x="34" y="242" width="452" height="232" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
-  <rect x="34" y="242" width="452" height="30" fill="#141413" />
-  <text x="44" y="262" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">Nutrition Information</text>
-  <text x="302" y="262" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#FFFFFF">Per ${esc(s.perServing.servingLabel)}</text>
-  <text x="478" y="262" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Per ${esc(s.per100.basisUnit)}</text>
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 ${svgHeight}" width="520" height="${svgHeight}" role="img" aria-label="Print-ready export over-sticker for ${esc(s.productName)}">
+  <rect width="520" height="${svgHeight}" fill="#F2ECE1" />
+  <!-- Corner Die-Cut Crop Marks -->
+  <path d="M12 30 H18 M20 22 V28 M500 22 V28 M502 30 H508 M12 ${30 + cardHeight} H18 M20 ${32 + cardHeight} V${38 + cardHeight} M500 ${32 + cardHeight} V${38 + cardHeight} M502 ${30 + cardHeight} H508" stroke="#4A473E" stroke-width="1.5" fill="none" />
+  <text x="260" y="21" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#4A473E">Die-Cut Export Over-Sticker • 88 mm × 112 mm • ${esc(s.destinationMarketName)}</text>
+  <rect x="20" y="30" width="480" height="${cardHeight}" rx="6" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
+  <rect x="20" y="30" width="480" height="46" rx="4" fill="#141413" />
+  <text x="34" y="59" font-family="Newsreader, Georgia, serif" font-size="18" font-weight="700" fill="#FFFFFF">${esc(s.productName.slice(0, 42))}</text>
+  <text x="486" y="59" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Net: ${esc(s.netContent)}</text>
+
+  <text x="34" y="98" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#1D4268">${esc(s.originLine)} • ${esc(s.compliantClaims[0]?.slice(0, 46) || '')}</text>
+  <line x1="34" y1="108" x2="486" y2="108" stroke="#D4CEC0" stroke-width="1" />
+
+  ${renderedIngLines}
+
+  <rect x="34" y="${containsBoxY}" width="452" height="${containsBoxHeight}" rx="3" fill="#FAF7F0" stroke="#141413" stroke-width="1.5" />
+  ${renderedContainsLines}
+
+  <rect x="34" y="${nutritionY}" width="452" height="${nutritionHeight}" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
+  <rect x="34" y="${nutritionY}" width="452" height="30" fill="#141413" />
+  <text x="44" y="${nutritionY + 20}" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">Nutrition Information</text>
+  <text x="302" y="${nutritionY + 20}" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#FFFFFF">Per ${esc(s.perServing.servingLabel)}</text>
+  <text x="478" y="${nutritionY + 20}" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Per ${esc(s.per100.basisUnit)}</text>
 
   <g font-family="Libre Franklin, sans-serif" font-size="14" fill="#141413">
-    <text x="44" y="290" font-weight="600">Energy</text>
-    <text x="302" y="290" text-anchor="end" font-family="Libre Franklin, sans-serif" font-weight="600">${s.perServing.energyKcal} kcal (${s.perServing.energyKj} kJ)</text>
-    <text x="478" y="290" text-anchor="end" font-family="Libre Franklin, sans-serif" font-weight="700">${s.per100.energyKcal} kcal (${s.per100.energyKj} kJ)</text>
-    <line x1="34" y1="298" x2="486" y2="298" stroke="#D4CEC0" />
+    <text x="44" y="${nutritionY + 48}" font-weight="600">Energy</text>
+    <text x="302" y="${nutritionY + 48}" text-anchor="end" font-family="Libre Franklin, sans-serif" font-weight="600">${s.perServing.energyKcal} kcal (${s.perServing.energyKj} kJ)</text>
+    <text x="478" y="${nutritionY + 48}" text-anchor="end" font-family="Libre Franklin, sans-serif" font-weight="700">${s.per100.energyKcal} kcal (${s.per100.energyKj} kJ)</text>
+    <line x1="34" y1="${nutritionY + 56}" x2="486" y2="${nutritionY + 56}" stroke="#D4CEC0" />
 
-    <text x="44" y="318" font-weight="600">Protein</text>
-    <text x="302" y="318" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.proteinG} g</text>
-    <text x="478" y="318" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.proteinG} g</text>
-    <line x1="34" y1="326" x2="486" y2="326" stroke="#D4CEC0" />
+    <text x="44" y="${nutritionY + 76}" font-weight="600">Protein</text>
+    <text x="302" y="${nutritionY + 76}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.proteinG} g</text>
+    <text x="478" y="${nutritionY + 76}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.proteinG} g</text>
+    <line x1="34" y1="${nutritionY + 84}" x2="486" y2="${nutritionY + 84}" stroke="#D4CEC0" />
 
-    <text x="44" y="346" font-weight="600">Total Fat (Sat.)</text>
-    <text x="302" y="346" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.totalFatG} g (${s.perServing.saturatedFatG} g)</text>
-    <text x="478" y="346" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.totalFatG} g (${s.per100.saturatedFatG} g)</text>
-    <line x1="34" y1="354" x2="486" y2="354" stroke="#D4CEC0" />
+    <text x="44" y="${nutritionY + 104}" font-weight="600">Total Fat (Sat.)</text>
+    <text x="302" y="${nutritionY + 104}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.totalFatG} g (${s.perServing.saturatedFatG} g)</text>
+    <text x="478" y="${nutritionY + 104}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.totalFatG} g (${s.per100.saturatedFatG} g)</text>
+    <line x1="34" y1="${nutritionY + 112}" x2="486" y2="${nutritionY + 112}" stroke="#D4CEC0" />
 
-    <text x="44" y="374" font-weight="600">Carbohydrate</text>
-    <text x="302" y="374" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.carbsG} g</text>
-    <text x="478" y="374" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.carbsG} g</text>
-    <line x1="34" y1="382" x2="486" y2="382" stroke="#D4CEC0" />
+    <text x="44" y="${nutritionY + 132}" font-weight="600">Carbohydrate</text>
+    <text x="302" y="${nutritionY + 132}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.carbsG} g</text>
+    <text x="478" y="${nutritionY + 132}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.carbsG} g</text>
+    <line x1="34" y1="${nutritionY + 140}" x2="486" y2="${nutritionY + 140}" stroke="#D4CEC0" />
 
-    <text x="54" y="402">Total Sugars</text>
-    <text x="302" y="402" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.totalSugarsG} g</text>
-    <text x="478" y="402" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.totalSugarsG} g</text>
-    <line x1="34" y1="410" x2="486" y2="410" stroke="#D4CEC0" />
+    <text x="54" y="${nutritionY + 160}">Total Sugars</text>
+    <text x="302" y="${nutritionY + 160}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.totalSugarsG} g</text>
+    <text x="478" y="${nutritionY + 160}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.totalSugarsG} g</text>
+    <line x1="34" y1="${nutritionY + 168}" x2="486" y2="${nutritionY + 168}" stroke="#D4CEC0" />
 
-    <text x="44" y="430" font-weight="600">Sodium</text>
-    <text x="302" y="430" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.sodiumMg} mg</text>
-    <text x="478" y="430" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.sodiumMg} mg</text>
-    <line x1="34" y1="438" x2="486" y2="438" stroke="#D4CEC0" />
+    <text x="44" y="${nutritionY + 188}" font-weight="600">Sodium</text>
+    <text x="302" y="${nutritionY + 188}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.sodiumMg} mg</text>
+    <text x="478" y="${nutritionY + 188}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.sodiumMg} mg</text>
+    <line x1="34" y1="${nutritionY + 196}" x2="486" y2="${nutritionY + 196}" stroke="#D4CEC0" />
 
-    <text x="44" y="460" font-weight="600">Salt Equivalent</text>
-    <text x="302" y="460" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.saltEquivalentG} g</text>
-    <text x="478" y="460" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.saltEquivalentG} g</text>
+    <text x="44" y="${nutritionY + 218}" font-weight="600">Salt Equivalent</text>
+    <text x="302" y="${nutritionY + 218}" text-anchor="end" font-family="Azeret Mono, monospace">${s.perServing.saltEquivalentG} g</text>
+    <text x="478" y="${nutritionY + 218}" text-anchor="end" font-family="Azeret Mono, monospace" font-weight="600">${s.per100.saltEquivalentG} g</text>
   </g>
 
-  <text x="34" y="498" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#141413">${esc(s.importerBlock.slice(0, 62))}</text>
-  <text x="34" y="520" font-family="Libre Franklin, sans-serif" font-size="14" fill="#4A473E">Storage: ${esc(s.storageInstructions.slice(0, 58))}</text>
+  ${renderedImporterLines}
+  <text x="34" y="${storageY}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#4A473E">Storage: ${esc(s.storageInstructions)}</text>
 
-  <g transform="translate(34, 536)">
-    <rect x="0" y="0" width="452" height="46" rx="4" fill="${stampBg}" stroke="${stampColor}" stroke-width="2" />
-    <text x="226" y="29" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="16" font-weight="700" fill="${stampColor}">Customs Proof Status: ${esc(result.verdictStamp)} (${result.readinessScore}%)</text>
+  <g transform="translate(34, ${stampY})">
+    <rect x="0" y="0" width="452" height="44" rx="4" fill="${stampBg}" stroke="${stampColor}" stroke-width="2" />
+    <text x="226" y="28" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="16" font-weight="700" fill="${stampColor}">Customs Proof Status: ${esc(result.verdictStamp)} (${result.readinessScore}%)</text>
   </g>
 </svg>`;
 }

@@ -11,7 +11,7 @@ import {
   inspectLabelDeterministic,
 } from './lib/regulatoryEngine';
 
-const STORAGE_KEY = 'packport_state_v1';
+const STORAGE_KEY = 'packport_history_v1';
 
 const EMPTY_LABEL: LabelInput = {
   id: 'custom-sku',
@@ -44,13 +44,37 @@ const EMPTY_LABEL: LabelInput = {
   },
 };
 
+function validateLabelInput(targetLabel: LabelInput | null | undefined): {
+  field: 'ingredientList' | 'servingSizeAmount';
+  message: string;
+} | null {
+  if (!targetLabel || !targetLabel.ingredientList?.trim()) {
+    return {
+      field: 'ingredientList',
+      message: 'Please enter at least one ingredient on the label.',
+    };
+  }
+  const serving = Number(targetLabel.nutrition?.servingSizeAmount);
+  if (!Number.isFinite(serving) || serving <= 0) {
+    return {
+      field: 'servingSizeAmount',
+      message: 'Serving size must be greater than 0g.',
+    };
+  }
+  return null;
+}
+
 export function App() {
   const [label, setLabel] = useState<LabelInput>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.label && parsed.label.productName) {
+        if (
+          parsed.label &&
+          parsed.label.productName &&
+          validateLabelInput(parsed.label) === null
+        ) {
           return parsed.label;
         }
       }
@@ -65,7 +89,11 @@ export function App() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed.resolvedIds)) {
+        if (
+          parsed.label &&
+          validateLabelInput(parsed.label) === null &&
+          Array.isArray(parsed.resolvedIds)
+        ) {
           return parsed.resolvedIds;
         }
       }
@@ -92,7 +120,7 @@ export function App() {
   const servingSizeInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (!isCleared && label.ingredientList.trim()) {
+    if (!isCleared && validateLabelInput(label) === null) {
       try {
         localStorage.setItem(
           STORAGE_KEY,
@@ -104,6 +132,16 @@ export function App() {
     }
   }, [label, resolvedIds, isCleared]);
 
+  const focusInvalidField = (field: 'ingredientList' | 'servingSizeAmount') => {
+    setTimeout(() => {
+      if (field === 'ingredientList') {
+        ingredientInputRef.current?.focus();
+      } else {
+        servingSizeInputRef.current?.focus();
+      }
+    }, 20);
+  };
+
   const executeInspection = async (
     targetLabel: LabelInput,
     targetResolvedIds: string[]
@@ -111,24 +149,10 @@ export function App() {
     setFieldError({ field: null, message: '' });
     setActionConfirmation('');
 
-    if (!targetLabel.ingredientList.trim()) {
-      setFieldError({
-        field: 'ingredientList',
-        message: 'Please enter at least one ingredient on the label.',
-      });
-      setTimeout(() => ingredientInputRef.current?.focus(), 20);
-      return;
-    }
-
-    if (
-      !targetLabel.nutrition.servingSizeAmount ||
-      Number(targetLabel.nutrition.servingSizeAmount) <= 0
-    ) {
-      setFieldError({
-        field: 'servingSizeAmount',
-        message: 'Serving size must be greater than 0g.',
-      });
-      setTimeout(() => servingSizeInputRef.current?.focus(), 20);
+    const validationError = validateLabelInput(targetLabel);
+    if (validationError) {
+      setFieldError(validationError);
+      focusInvalidField(validationError.field);
       return;
     }
 
@@ -192,12 +216,19 @@ export function App() {
     setLabel(EMPTY_LABEL);
     setResolvedIds([]);
     setIsCleared(true);
+    setResult(inspectLabelDeterministic(SAMPLE_SKUS[0], []));
     setFieldError({ field: null, message: '' });
     setActionConfirmation('');
     setEngineNotice('');
   };
 
   const handleApplyFix = (findingId: string) => {
+    const validationError = validateLabelInput(label);
+    if (validationError) {
+      setFieldError(validationError);
+      focusInvalidField(validationError.field);
+      return;
+    }
     const nextResolved = resolvedIds.includes(findingId)
       ? resolvedIds
       : [...resolvedIds, findingId];
@@ -208,6 +239,12 @@ export function App() {
   };
 
   const handleApplyAllFixes = () => {
+    const validationError = validateLabelInput(label);
+    if (validationError) {
+      setFieldError(validationError);
+      focusInvalidField(validationError.field);
+      return;
+    }
     const allIds = result.findings.map((f) => f.id);
     setResolvedIds(allIds);
     const updated = inspectLabelDeterministic(label, allIds);
@@ -255,6 +292,10 @@ export function App() {
   const nutritionFindings = result.findings.filter(
     (f) => f.targetArea === 'nutrition'
   );
+
+  const activeMarketName = isCleared
+    ? MARKET_META[label.destinationMarket].name
+    : result.destinationMeta.name;
 
   return (
     <div className="page-shell">
@@ -333,7 +374,7 @@ export function App() {
                       };
                       setLabel(nextLabel);
                       setResolvedIds([]);
-                      if (!isCleared && nextLabel.ingredientList.trim()) {
+                      if (!isCleared && validateLabelInput(nextLabel) === null) {
                         void executeInspection(nextLabel, []);
                       }
                     }}
@@ -453,7 +494,7 @@ export function App() {
                 />
               </div>
 
-              <div className="form-group" style={{ marginBottom: '22px' }}>
+              <div className="form-group" style={{ marginBottom: '16px' }}>
                 <button
                   type="submit"
                   className="primary-cta"
@@ -467,12 +508,12 @@ export function App() {
 
               <fieldset className="nutrition-fieldset">
                 <legend className="nutrition-legend">
-                  Per-Serving Nutrition Values on Origin Label
+                  Per-Serving Nutrition
                 </legend>
                 <div className="nutrition-grid-inputs">
                   <div>
                     <label className="form-label" htmlFor="serving-size">
-                      Serving Size ({label.nutrition.servingSizeUnit})
+                      Serving ({label.nutrition.servingSizeUnit})
                     </label>
                     <input
                       id="serving-size"
@@ -482,12 +523,14 @@ export function App() {
                       className={`form-input ${fieldError.field === 'servingSizeAmount' ? 'invalid' : ''}`}
                       value={label.nutrition.servingSizeAmount}
                       onChange={(e) => {
+                        const rawVal = e.target.value;
+                        const numVal = rawVal === '' ? 0 : parseFloat(rawVal);
                         setLabel({
                           ...label,
                           isExample: false,
                           nutrition: {
                             ...label.nutrition,
-                            servingSizeAmount: parseFloat(e.target.value) || 0,
+                            servingSizeAmount: Number.isNaN(numVal) ? 0 : numVal,
                           },
                         });
                         if (fieldError.field === 'servingSizeAmount') {
@@ -545,7 +588,7 @@ export function App() {
 
                   <div>
                     <label className="form-label" htmlFor="total-fat-g">
-                      Total Fat (g)
+                      Fat (g)
                     </label>
                     <input
                       id="total-fat-g"
@@ -568,7 +611,7 @@ export function App() {
 
                   <div>
                     <label className="form-label" htmlFor="total-sugars-g">
-                      Total Sugars (g)
+                      Sugars (g)
                     </label>
                     <input
                       id="total-sugars-g"
@@ -621,7 +664,7 @@ export function App() {
 
               <div className="form-group">
                 <label className="form-label" htmlFor="contains-statement">
-                  Allergen "Contains:" Summary on Origin Pack (if any)
+                  Origin &quot;Contains:&quot; Line
                 </label>
                 <input
                   id="contains-statement"
@@ -641,7 +684,7 @@ export function App() {
 
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label" htmlFor="importer-details">
-                  Local Destination Importer Name &amp; Street Address
+                  Local Importer Address
                 </label>
                 <input
                   id="importer-details"
@@ -671,7 +714,7 @@ export function App() {
         >
           <div className="panel-header">
             <h2 className="panel-heading">
-              2. Customs Proof ({result.destinationMeta.name})
+              2. Customs Proof ({activeMarketName})
             </h2>
           </div>
 
@@ -784,7 +827,7 @@ export function App() {
                     </h3>
                     <div
                       className="sticker-svg-wrapper"
-                      style={{ maxWidth: '500px', margin: '0 auto' }}
+                      style={{ maxWidth: '520px', margin: '0 auto' }}
                     >
                       <img
                         src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(stickerSvgMarkup)}`}
