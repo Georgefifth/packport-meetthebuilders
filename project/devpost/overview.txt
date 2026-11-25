@@ -1,0 +1,96 @@
+Meet the Builders 2026 — Google Cloud Gen AI Academy APAC Edition 2026
+URL: https://hack2skill.com/event/meetthebuilders2026/dashboard/roadmap?utm_source=hack2skill&utm_medium=homepage
+Companion Showcase URL: https://hack2skill.com/event/apac-genaiacademy
+Client / Sponsor: Google Cloud
+Platform Partner / Organiser: Hack2skill
+Event Type: HACKATHON
+Status: APPROVED
+Mode: VIRTUAL
+Ticket: FREE (Zero cost)
+Team Size: 1 to 4 members
+Impressions: 13,353+ | Registrations: 1,101+ (Meet the Builders 2026) / 334,000+ developers across 12+ APAC countries (Gen AI Academy APAC 2026)
+Support Email: academysupport-apac@hack2skill.com
+
+=== TIMELINE & DEADLINES (UTC & IST) ===
+- Registration Start: 2026-10-25T08:46:00.000Z (25 Oct 2026, 14:16 IST)
+- Registration End: 2026-11-25T18:29:00.000Z (25 Nov 2026, 23:59 IST)
+- Submission Start: 2026-10-25T18:30:00.000Z (26 Oct 2026, 00:00 IST)
+- Submission End (Deadline): 2026-11-25T18:29:00.000Z (25 Nov 2026, 23:59 IST)
+- Timeline Phase 1 — Registration (2026-10-25T08:46:00.000Z to 2026-11-25T18:29:00.000Z)
+- Timeline Phase 2 — Hall of Fame Submissions (2026-10-25T18:30:00.000Z to 2026-11-25T18:29:00.000Z):
+  "Want a permanent spot among APAC’s best? Share your code and your demo to inspire other developers. Hall of Fame entries are also considered for our Weekly Top 3 social spotlight. If selected, your project goes live on the Meet the Builders page and you earn the official Google Gen AI APAC Builder 2026 badge."
+- Timeline Phase 3 — Get Featured Submission (2026-10-25T18:30:00.000Z to 2026-11-25T18:29:00.000Z):
+  "Share your project in under 5 minutes. Paste your links, no code upload needed. If selected, your project goes live on the Meet the Builders page and you earn the official Google Gen AI APAC Builder 2026 badge."
+
+=== ABOUT MEET THE BUILDERS 2026 ===
+Built something that matters? Let’s put it on the map.
+Across Asia Pacific, builders are using Google AI to fix problems no one else was solving and we have decided it’s time for the world to see it. From farmers to classrooms, We’re calling on 1,000 innovators to share their work. Get featured, earn your badge, and secure your place in the Hall of Fame.
+Get featured. Earn your badge. Join the Hall of Fame.
+
+Hero Headline:
+- "Built something with Google AI? Let the community witness it."
+- "Meet the Builders: You noticed a problem. You built something to fix it."
+- "If you're a developer, student, researcher, or problem-solver anywhere across Asia Pacific, this is your stage."
+- Region: APAC Region
+- Official Hashtags: #Meetthebuilders #SolvewithAI (also #GenAIAcademyAPAC #BuildinAPAC)
+
+Live Projects in APAC — "1000 Builders, 1000 Stories":
+- "A live showcase of projects created by developers and innovators using Google Cloud technologies to solve challenges in their local communities."
+- "From healthcare and agriculture to sustainability, education, and AI assistants — explore projects being built and submitted in real time by the next generation of AI builders across APAC. Selected projects go live here, and the best earn a place in the Hall of Fame."
+
+=== WHAT'S IN IT FOR YOU ===
+1. Get featured:
+   "Showcase your project on the official Meet the Builders page of Gen AI Academy APAC Edition 2026."
+2. Wear the badge:
+   "Every selected project that goes live earns the official Google Gen AI APAC Builder 2026 badge. Add it to your LinkedIn, GitHub, and portfolio as proof that you build things that count."
+3. Win the week and enter the Hall of Fame:
+   "The Hall of Fame is a public, permanent home for the best projects in APAC. Every week, our Top 3 submissions are featured in our weekly social post and added to the Hall of Fame. Hall of Fame entries are automatically considered. Yours could be next."
+
+=== HOW IT WORKS (6 STEPS) ===
+- Step 01 — Register: "Click Register now. It takes a minute."
+- Step 02 — Make a video: "Record a demo of 90 seconds or less. Start on camera by introducing yourself, then tell us the problem, show your solution, and say who it helps."
+- Step 03 — Post about it: "Share your project on LinkedIn, YouTube, X, Instagram or Facebook with #Meetthebuilders. Adding your video to the post is optional."
+- Step 04 — Head to submissions: "Pick your path and paste your public links. No file uploads on the platform."
+- Step 05 — We review: "Every submission gets a real look."
+- Step 06 — You're in: "Submissions get reviewed first and then published on this page."
+
+=== WHO CAN SUBMIT / WHAT TO SUBMIT / WHAT YOU RECEIVE ===
+- Who can submit: "Any registered Gen AI Academy APAC participant across Asia Pacific region."
+- What to submit: "A working Gen AI-powered solution to a real local or regional problem"
+- What you receive: "A permanent public listing on this page as a featured APAC builder"
+
+=== PICK YOUR PATH (SUBMISSION TRACKS) ===
+1. Path 01 — Get featured:
+   "Get your story out there, in a few simple steps. Show us what you built and which Google AI tools made it happen."
+   You bring:
+   - A demo video on Google Drive (public link, under 15 MB, 90 seconds or less, starting with you on camera)
+   - 3 bullets on the Google AI tools you used (Gemini API, Vertex AI, Gemma, Firebase Genkit...)
+   - The link to your social media post with #Meetthebuilders
+
+2. Path 02 — Go for the Hall of Fame:
+   "Show the work behind the solution. Want a permanent spot among APAC's best? Share your code to inspire other developers. Hall of Fame entries are also considered for the Weekly Top 3, which is featured in our weekly social post."
+   You bring:
+   - Your GitHub repo URL
+   - A demo video on Google Drive (public link, under 15 MB, 90 seconds or less, starting with you on camera)
+   - 3 bullets on the Google AI tools you used
+   - The link to your social media post with #Meetthebuilders
+
+=== JURY & JUDGES (GOOGLE CLOUD & APAC EXPERTS) ===
+Cohort 1 Jury:
+- Kenrick Tandrian — Customer Solutions Consultant, Google Cloud
+- Taewoo Kim — Customer Engineer, JAPAC, Google Cloud
+- Thu Ya K. — Developer Relations Engineer, Google
+- Abirami Sukumaran — Staff Developer Advocate, Google Cloud
+- Catherine Wang — Principle Architect, Gen AI APAC, Google Cloud
+
+Cohort 2 Jury:
+- Sharmila Devi — AI Consulting Lead, Google
+- Faisal Hadiputra — AI Engineer, Google
+- Nirav Kothari — Sr. Technical Architect, Quantiphi Analytics | Google Developer Expert
+- Indranil Chandra — ML & Data Architect, Upstox | Coorganiser, GDG MAD Mumbai
+- Allison Ding — Senior Developer Advocate, Data Science, NVIDIA
+
+Cohort 3 Workshop Speakers / Google DevRel:
+- Balaji Subramaniam — DevRel Engineer @ Google Cloud
+- Vlad Kolesnikov — Developer Relations Engineer, Google
+- Sara Ford — Senior Developer Relations Engineer, Google

@@ -1,0 +1,43 @@
+Updates & Hall of Fame Showcase — Meet the Builders 2026
+
+=== PROGRAM UPDATES ===
+- Meet the Builders 2026 opened on October 25, 2026 (2026-10-25T08:46:00.000Z) and runs through November 25, 2026 (2026-11-25T18:29:00.000Z).
+- Both submission tracks ("Hall of Fame Submissions" and "Get Featured Submission") are open concurrently until November 25, 2026 at 18:29 UTC (23:59 IST).
+- Weekly Top 3 submissions are selected every week from Hall of Fame entries, featured in the official weekly social spotlight, and permanently inducted into the APAC Hall of Fame.
+- Over 940 total submissions and 527+ latest submissions have been showcased across 12+ APAC countries.
+
+=== HALL OF FAME / WEEKLY TOP 3 FEATURED PROJECTS (PAST WINNERS & SHOWCASE EXAMPLES) ===
+1. AI Movie Companion (Kuncheng Li, China) — "AI assistant that tracks video content shot-by-shot to answer questions about what you've watched without spoiling what's ahead." [Tags: Analytics, Multi-Agent]
+2. SafeSight (Ahmad Hadi Setiawan, Indonesia) — "AI safety inspector that detects workplace hazards in real time, automatically warns workers, and issues stop-work alerts to supervisors to prevent incidents" [Tags: Analytics, Multi-Agent]
+3. NeighbourHood (Risman Arung, Indonesia - Sulawesi Selatan) — "An AI-powered app that connects neighbors to share food, give away unused items, and lend tools to build stronger communities and reduce waste." [Tags: Analytics, Multi-Agent]
+4. Out of Office (Alagarsamy Duraikumaran, Singapore) [Tags: Analytics, Multi-Agent]
+5. BeJo (Anton Rifco Susilo, Indonesia - Banten) [Tags: Analytics, Multi-Agent]
+6. Erdfeld AI (Abdul Moeed, Pakistan - Islamabad) [Tags: Analytics, Multi-Agent]
+7. Bee6 (Rangga Bagas, Indonesia - Jakarta) [Tags: Analytics, Multi-Agent]
+8. Aura AI (Ellie Chen, Taiwan - Taipei) [Tags: Analytics, Multi-Agent]
+9. TrueSite (Wai Lin, Thailand - Bangkok) [Tags: Analytics, Multi-Agent]
+10. Batch Lens (Muthukumar Arunachalam, Singapore) [Tags: Analytics, Multi-Agent]
+11. NSA (Abdi Darnain, Indonesia - Banten) [Tags: Analytics, Multi-Agent]
+
+=== COHORT PERFORMANCE EXCELLENCE AWARD WINNERS ===
+Cohort 1 Performance Excellence Awards:
+- Best usage of Google Cloud tools & services: Agentic Flow
+- Most unique use case of AI: Bio developer
+- Best real-world enterprise use case: NeurIPS
+- Best UI/UX: Fireflies
+- Best multi-model integration: CureQuest
+
+Cohort 2 Performance Excellence Awards:
+- Best usage of Google Cloud tools & services: AIU Studio
+- Best UI/UX: WebHackers
+- Best usage of NVIDIA tools & services: CuDecision
+- Most unique use case of AI: Nidumollu Phani Siva Kousik
+- Best multi-model integration: De-GenZ
+
+Cohort 3 Winners & Performance Excellence Awards:
+- 1st Place: Meredith Cheung | 2nd Place: Pavani Rajula | 3rd Place: A Samuel Arun Kumar
+- Best use of Google APIs: WeLumaAI (Samuel Christian Suhartanto)
+- Great user empowerment: EMOS (Jincen E Mathew)
+- Intuitive data visualization: Personal Gemini Journal (Ramya Tantry)
+- Great human-centered safety design: Untangled (Sumit Kumar)
+- Great vector search implementation: Reflections Journal (Paul Choi)

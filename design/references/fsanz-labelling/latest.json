@@ -1,0 +1,149 @@
+{
+  "url": "https://www.foodstandards.gov.au/business/labelling/allergen-labelling",
+  "at": "2026-11-25T16:22:11.762Z",
+  "viewports": {
+    "desktop": {
+      "loadMs": 3830,
+      "consoleErrors": [
+        "The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy."
+      ],
+      "badRequests": [],
+      "title": "Allergen labelling for food businesses | Food Standards Australia New Zealand",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "totalChars": 6258,
+      "small12Share": 0,
+      "small14Share": 0.020453819111537232,
+      "monoShare": 0,
+      "lowContrastShare": 0.010067114093959731,
+      "upperShare": 0.041927527983304874,
+      "families": [
+        [
+          "Open Sans",
+          6258
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [
+        {
+          "text": "Main navigation",
+          "ratio": 1.42,
+          "size": 30
+        },
+        {
+          "text": "Search",
+          "ratio": 1.42,
+          "size": 30
+        },
+        {
+          "text": "Search",
+          "ratio": 1,
+          "size": 13
+        },
+        {
+          "text": "Business guidance",
+          "ratio": 3.19,
+          "size": 18
+        },
+        {
+          "text": "Footer bottom links",
+          "ratio": 2.03,
+          "size": 30
+        }
+      ],
+      "interactiveCount": 76,
+      "smallTargets": 44,
+      "unnamedInteractive": 12,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 266
+    },
+    "mobile": {
+      "loadMs": 2715,
+      "consoleErrors": [
+        "The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy."
+      ],
+      "badRequests": [],
+      "title": "Allergen labelling for food businesses | Food Standards Australia New Zealand",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "totalChars": 6091,
+      "small12Share": 0,
+      "small14Share": 0.01116401247742571,
+      "monoShare": 0,
+      "lowContrastShare": 0.007880479395829913,
+      "upperShare": 0.040273704789833824,
+      "families": [
+        [
+          "Open Sans",
+          6091
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [
+        {
+          "text": "Search",
+          "ratio": 1.42,
+          "size": 30
+        },
+        {
+          "text": "Search",
+          "ratio": 1,
+          "size": 16
+        },
+        {
+          "text": "Business guidance",
+          "ratio": 3.19,
+          "size": 18
+        },
+        {
+          "text": "Footer bottom links",
+          "ratio": 2.03,
+          "size": 30
+        }
+      ],
+      "interactiveCount": 66,
+      "smallTargets": 38,
+      "unnamedInteractive": 12,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 104
+    }
+  },
+  "findings": [
+    {
+      "sev": "FAIL",
+      "code": "console",
+      "msg": "desktop: 1 console/page errors, e.g. The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy."
+    },
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "desktop: 12 controls have no accessible name"
+    },
+    {
+      "sev": "WARN",
+      "code": "wall-of-text",
+      "msg": "desktop: 266 words above the fold"
+    },
+    {
+      "sev": "FAIL",
+      "code": "console",
+      "msg": "mobile: 1 console/page errors, e.g. The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy."
+    },
+    {
+      "sev": "WARN",
+      "code": "tap-targets",
+      "msg": "mobile: 38/66 tap targets are smaller than 40x32px"
+    },
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "mobile: 12 controls have no accessible name"
+    }
+  ]
+}

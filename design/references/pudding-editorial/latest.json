@@ -1,0 +1,104 @@
+{
+  "url": "https://pudding.cool/",
+  "at": "2026-11-25T16:21:52.804Z",
+  "viewports": {
+    "desktop": {
+      "loadMs": 4642,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "The Pudding",
+      "lang": "en",
+      "h1": 0,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "totalChars": 3365,
+      "small12Share": 0,
+      "small14Share": 0.025854383358098067,
+      "monoShare": 0,
+      "lowContrastShare": 0,
+      "upperShare": 0.10473623411628802,
+      "families": [
+        [
+          "Atlas Grotesk",
+          2297
+        ],
+        [
+          "Gooper SemiCondensed",
+          592
+        ],
+        [
+          "Atlas Typewriter",
+          476
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 64,
+      "smallTargets": 17,
+      "unnamedInteractive": 2,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 82
+    },
+    "mobile": {
+      "loadMs": 4887,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "The Pudding",
+      "lang": "en",
+      "h1": 0,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "totalChars": 3327,
+      "small12Share": 0,
+      "small14Share": 0.012924556657649534,
+      "monoShare": 0,
+      "lowContrastShare": 0,
+      "upperShare": 0.09254197579070675,
+      "families": [
+        [
+          "Atlas Grotesk",
+          2297
+        ],
+        [
+          "Gooper SemiCondensed",
+          590
+        ],
+        [
+          "Atlas Typewriter",
+          440
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 57,
+      "smallTargets": 14,
+      "unnamedInteractive": 2,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 28
+    }
+  },
+  "findings": [
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "desktop: 2 controls have no accessible name"
+    },
+    {
+      "sev": "WARN",
+      "code": "h1",
+      "msg": "desktop: expected exactly one <h1>, found 0"
+    },
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "mobile: 2 controls have no accessible name"
+    },
+    {
+      "sev": "WARN",
+      "code": "h1",
+      "msg": "mobile: expected exactly one <h1>, found 0"
+    }
+  ]
+}

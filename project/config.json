@@ -1,14 +1,21 @@
 {
-  "hackathon_name": "meetthebuilder",
-  "devpost_url": "https://meetthebuilder.devpost.com/",
-  "deadline_iso": "",
-  "video_max_seconds": 180,
+  "hackathon_name": "Meet the Builders 2026 (Google Cloud Gen AI Academy APAC Edition)",
+  "devpost_url": "https://hack2skill.com/event/meetthebuilders2026/dashboard/roadmap?utm_source=hack2skill&utm_medium=homepage",
+  "deadline_iso": "2026-11-25T18:29:00+00:00",
+  "video_max_seconds": 90,
   "required_paths": [
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
-  "sponsor_tech": [],
-  "processes_user_input": false,
-  "quality_commands": [],
+  "sponsor_tech": [
+    "@google/genai",
+    "gemini"
+  ],
+  "processes_user_input": true,
+  "quality_commands": [
+    "npm run build",
+    "npm test"
+  ],
   "fix_commands": {
     "js": [],
     "rust": []
@@ -16,9 +23,9 @@
   "app_dir": ".",
   "install": "npm install",
   "build": "npm run build",
-  "test": "",
+  "test": "npm test",
   "start": "npm run dev",
   "local_url": "http://localhost:5173",
-  "live_url": "",
-  "repo_url": ""
+  "live_url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "repo_url": "https://github.com/Georgefifth/packport-meetthebuilders"
 }

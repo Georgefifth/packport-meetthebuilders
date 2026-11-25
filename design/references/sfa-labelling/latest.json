@@ -1,0 +1,96 @@
+{
+  "url": "https://www.sfa.gov.sg/food-information/labelling-packaging-information/a-guide-to-food-labelling-and-advertisements",
+  "at": "2026-11-25T16:21:46.803Z",
+  "viewports": {
+    "desktop": {
+      "loadMs": 3407,
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "badRequests": [
+        "404 https://www.sfa.gov.sg/food-information/labelling-packaging-information/a-guide-to-food-labelling-and-advertisements"
+      ],
+      "title": "404: This page could not be found.",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "totalChars": 32,
+      "small12Share": 0,
+      "small14Share": 0,
+      "monoShare": 0,
+      "lowContrastShare": 0,
+      "upperShare": 0.043478260869565216,
+      "families": [
+        [
+          "system-ui",
+          32
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 0,
+      "smallTargets": 0,
+      "unnamedInteractive": 0,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 7
+    },
+    "mobile": {
+      "loadMs": 2160,
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "badRequests": [
+        "404 https://www.sfa.gov.sg/food-information/labelling-packaging-information/a-guide-to-food-labelling-and-advertisements"
+      ],
+      "title": "404: This page could not be found.",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "totalChars": 32,
+      "small12Share": 0,
+      "small14Share": 0,
+      "monoShare": 0,
+      "lowContrastShare": 0,
+      "upperShare": 0.043478260869565216,
+      "families": [
+        [
+          "system-ui",
+          32
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 0,
+      "smallTargets": 0,
+      "unnamedInteractive": 0,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 7
+    }
+  },
+  "findings": [
+    {
+      "sev": "FAIL",
+      "code": "console",
+      "msg": "desktop: 1 console/page errors, e.g. Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "sev": "FAIL",
+      "code": "requests",
+      "msg": "desktop: 1 failed requests, e.g. 404 https://www.sfa.gov.sg/food-information/labelling-packaging-information/a-guide-to-food-labelling-and-advertisements"
+    },
+    {
+      "sev": "FAIL",
+      "code": "console",
+      "msg": "mobile: 1 console/page errors, e.g. Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "sev": "FAIL",
+      "code": "requests",
+      "msg": "mobile: 1 failed requests, e.g. 404 https://www.sfa.gov.sg/food-information/labelling-packaging-information/a-guide-to-food-labelling-and-advertisements"
+    }
+  ]
+}

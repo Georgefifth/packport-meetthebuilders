@@ -1,0 +1,178 @@
+{
+  "url": "https://world.openfoodfacts.org/product/3017620422003/nutella-ferrero",
+  "at": "2026-11-25T16:20:44.322Z",
+  "viewports": {
+    "desktop": {
+      "loadMs": 32200,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "Nutella – Ferrero – 400 g e",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "totalChars": 8603,
+      "small12Share": 0.43810298733000114,
+      "small14Share": 0.5443449959316518,
+      "monoShare": 0,
+      "lowContrastShare": 0.1192607230036034,
+      "upperShare": 0.16147267719959416,
+      "families": [
+        [
+          "Public Sans",
+          8552
+        ],
+        [
+          "Material Icons",
+          51
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [
+        {
+          "text": "This product page is not complete. You c",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": "or",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": ". Thank you!",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": "×",
+          "ratio": 3.99,
+          "size": 22
+        },
+        {
+          "text": "Nutri-Score E",
+          "ratio": 3.48,
+          "size": 16
+        }
+      ],
+      "interactiveCount": 337,
+      "smallTargets": 285,
+      "unnamedInteractive": 10,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 164
+    },
+    "mobile": {
+      "loadMs": 29336,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "Nutella – Ferrero – 400 g e",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "totalChars": 8610,
+      "small12Share": 0.43774680603948896,
+      "small14Share": 0.5461091753774681,
+      "monoShare": 0,
+      "lowContrastShare": 0.11916376306620209,
+      "upperShare": 0.16039374638100753,
+      "families": [
+        [
+          "Public Sans",
+          8554
+        ],
+        [
+          "Material Icons",
+          56
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [
+        {
+          "text": "This product page is not complete. You c",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": "or",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": ". Thank you!",
+          "ratio": 3.16,
+          "size": 13
+        },
+        {
+          "text": "×",
+          "ratio": 3.99,
+          "size": 22
+        },
+        {
+          "text": "Nutri-Score E",
+          "ratio": 3.48,
+          "size": 16
+        }
+      ],
+      "interactiveCount": 341,
+      "smallTargets": 290,
+      "unnamedInteractive": 10,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 37
+    }
+  },
+  "findings": [
+    {
+      "sev": "FAIL",
+      "code": "tiny-text",
+      "msg": "desktop: 44% of text is under 12px"
+    },
+    {
+      "sev": "FAIL",
+      "code": "contrast",
+      "msg": "desktop: 12% of text is below 4.5:1 contrast"
+    },
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "desktop: 10 controls have no accessible name"
+    },
+    {
+      "sev": "WARN",
+      "code": "wall-of-text",
+      "msg": "desktop: 164 words above the fold"
+    },
+    {
+      "sev": "WARN",
+      "code": "slow-load",
+      "msg": "desktop: took 32200ms to settle"
+    },
+    {
+      "sev": "FAIL",
+      "code": "tiny-text",
+      "msg": "mobile: 44% of text is under 12px"
+    },
+    {
+      "sev": "FAIL",
+      "code": "contrast",
+      "msg": "mobile: 12% of text is below 4.5:1 contrast"
+    },
+    {
+      "sev": "WARN",
+      "code": "tap-targets",
+      "msg": "mobile: 290/341 tap targets are smaller than 40x32px"
+    },
+    {
+      "sev": "WARN",
+      "code": "unnamed-controls",
+      "msg": "mobile: 10 controls have no accessible name"
+    },
+    {
+      "sev": "WARN",
+      "code": "slow-load",
+      "msg": "mobile: took 29336ms to settle"
+    }
+  ]
+}
