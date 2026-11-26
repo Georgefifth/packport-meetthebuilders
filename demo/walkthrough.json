@@ -1,0 +1,76 @@
+{
+  "url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "viewport": { "width": 1920, "height": 1080 },
+  "steps": [
+    {
+      "caption": "APAC food exporters face port holds when labels violate Singapore SFA, Australia FSANZ, or Japan CAA rules.",
+      "wait": 4500
+    },
+    {
+      "click": "button:has-text('Example: Chiang Mai Mango Drink')",
+      "caption": "Try 3 real APAC export SKUs in one click — no login or file upload required.",
+      "wait": 4500
+    },
+    {
+      "click": "button:has-text('Example: Saigon Matcha Oat Bar')",
+      "caption": "Compare Japan CAA Salt Equivalent & High Protein thresholds instantly.",
+      "wait": 4500
+    },
+    {
+      "click": "button:has-text('Example: Bali Crispy Prawn Sambal')",
+      "caption": "Inspecting Bali Crispy Prawn Sambal → Singapore (SFA): 16% Readiness (Hold: Relabel Required).",
+      "wait": 4500
+    },
+    {
+      "scroll": 520,
+      "caption": "Redlined Origin Package Proof & Multi-Corridor Readiness Comparison across 3 countries.",
+      "wait": 6000
+    },
+    {
+      "scroll": 580,
+      "caption": "Statutory Findings cite exact Singapore SFA clauses for claims, belacan/kemiri allergens, and INS codes.",
+      "wait": 6500
+    },
+    {
+      "scroll": -1100,
+      "caption": "Click 'Apply All Regulatory Fixes (7)' to remediate every violation on the export over-sticker.",
+      "wait": 3000
+    },
+    {
+      "click": "button:has-text('Apply All Regulatory Fixes')",
+      "caption": "100% Cleared for Export — inline bolded allergens, INS 621/211 codes, and Per-100g nutrition panel.",
+      "wait": 6500
+    },
+    {
+      "click": "button:has-text('Side-by-Side Proof')",
+      "caption": "Compare the Redlined Origin Proof side-by-side with the Print-Ready Export Over-Sticker (88×112 mm).",
+      "wait": 5500
+    },
+    {
+      "click": "button:has-text('Sticker Focus')",
+      "caption": "Download the vector Sticker SVG or structured Customs Inspection Report (.txt).",
+      "wait": 3500
+    },
+    {
+      "click": "button:has-text('Download Sticker SVG')",
+      "caption": "Downloaded print-ready die-cut SVG over-sticker for packaging printers.",
+      "wait": 3500
+    },
+    {
+      "click": "button:has-text('Download Customs Report (.txt)')",
+      "caption": "Downloaded written customs pre-flight dossier for freight forwarders.",
+      "wait": 3500
+    },
+    {
+      "scroll": 1500,
+      "caption": "Built with Google Gemini (@google/genai) 3-agent structured schema + deterministic statutory engine.",
+      "wait": 6500
+    },
+    {
+      "scroll": -1500,
+      "screenshot": "final-hero.png",
+      "caption": "PackPort — Clear your APAC food & beverage labels for export before your shipment leaves port.",
+      "wait": 5000
+    }
+  ]
+}
