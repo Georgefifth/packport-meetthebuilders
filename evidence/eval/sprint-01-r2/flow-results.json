@@ -1,0 +1,486 @@
+{
+  "url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "sprint01Checks": {
+    "check1": {
+      "pass": true,
+      "rowCount": 3,
+      "distinctScores": [
+        "16",
+        "14",
+        "22"
+      ],
+      "distinctTopFindings": [
+        "Singapore SFA: Prohibited therapeutic claim (\"Boosts Immunity\") on front of pack",
+        "Undeclared or unbolded mandatory allergens (Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean)",
+        "Nutrition table missing mandatory Per 100g column & Salt Equivalent (食塩相当量 3.94 g / 100g)"
+      ],
+      "rowData": [
+        {
+          "text": "Singapore (SFA)\nHold: Relabel Required\n16% (5 critical, 2 warning)\nTop finding: Singapore SFA: Prohibited therapeutic claim (\"Boosts Immunity\") on front of pack\nActive Corridor",
+          "hasInspectBtn": false,
+          "hasActiveBadge": true
+        },
+        {
+          "text": "Australia (FSANZ)\nHold: Relabel Required\n14% (6 critical, 1 warning)\nTop finding: Undeclared or unbolded mandatory allergens (Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean)\nInspect Corridor",
+          "hasInspectBtn": true,
+          "hasActiveBadge": false
+        },
+        {
+          "text": "Japan (CAA)\nHold: Relabel Required\n22% (6 critical, 1 warning)\nTop finding: Nutrition table missing mandatory Per 100g column & Salt Equivalent (食塩相当量 3.94 g / 100g)\nInspect Corridor",
+          "hasInspectBtn": true,
+          "hasActiveBadge": false
+        }
+      ]
+    },
+    "check2": {
+      "pass": true,
+      "leftMarketAfterAuInspect": "AU_FSANZ",
+      "rightHeadingAfterAuInspect": "2. Customs Proof (Australia (FSANZ))",
+      "auRowActive": true,
+      "sgRowInspectBtn": true,
+      "leftMarketAfterJpInspect": "JP_CAA",
+      "rightHeadingAfterJpInspect": "2. Customs Proof (Japan (CAA))",
+      "jpRowActive": true
+    },
+    "check3": {
+      "pass": true,
+      "sgRowTextAfterFix": "Singapore (SFA)\nCleared for Export\n100% (0 critical, 0 warning)\nTop finding: All statutory requirements met — ready to print & ship\nActive Corridor",
+      "auRowTextAfterSgFix": "Australia (FSANZ)\nCleared for Export\n100% (0 critical, 0 warning)\nTop finding: All statutory requirements met — ready to print & ship\nInspect Corridor",
+      "jpRowTextAfterSgFix": "Japan (CAA)\nCleared for Export\n100% (0 critical, 0 warning)\nTop finding: All statutory requirements met — ready to print & ship\nInspect Corridor",
+      "auScoreAfterSwitchWithFixes": "100%",
+      "sgRowWhileViewingAu": "Singapore (SFA)\nCleared for Export\n100% (0 critical, 0 warning)\nTop finding: All statutory requirements met — ready to print & ship\nInspect Corridor",
+      "sgScoreAfterSwitchBack": "100%",
+      "sgVerdictAfterSwitchBack": "Cleared for Export"
+    },
+    "check4": {
+      "pass": true,
+      "desktopTogglePlacement": {
+        "barTop": 428,
+        "barBottom": 472,
+        "gridTop": 493,
+        "isAboveGrid": true
+      },
+      "gridBeforeToggle": {
+        "className": "proof-comparison-grid ",
+        "gridTemplateColumns": "714px",
+        "scrollWidth": 1440
+      },
+      "gridAfterSideBySide": {
+        "className": "proof-comparison-grid side-by-side",
+        "gridTemplateColumns": "345px 345px",
+        "scrollWidth": 1440,
+        "childrenRects": [
+          {
+            "x": 1016,
+            "y": 492.5625,
+            "width": 345,
+            "height": 648,
+            "top": 492.5625,
+            "right": 1361,
+            "bottom": 1140.5625,
+            "left": 1016
+          },
+          {
+            "x": 647,
+            "y": 492.5625,
+            "width": 345,
+            "height": 648,
+            "top": 492.5625,
+            "right": 992,
+            "bottom": 1140.5625,
+            "left": 647
+          }
+        ]
+      },
+      "gridAfterBackToFocus": {
+        "className": "proof-comparison-grid ",
+        "gridTemplateColumns": "714px",
+        "scrollWidth": 1440
+      }
+    },
+    "check5": {
+      "pass": true,
+      "reportFilename": "bali-crispy-prawn-candlenut-sambal-sg_sfa-report.txt",
+      "reportStatusBanner": "Downloaded customs inspection report (.txt).",
+      "reportTxtLength": 4889,
+      "reportTxtPreview": "========================================================================\nPACKPORT — APAC EXPORT CUSTOMS PRE-FLIGHT INSPECTION REPORT\n========================================================================\nProduct Name:        Bali Crispy Prawn & Candlenut Sambal\nOrigin Country:      Indonesia (Denpasar, Bali)\nDestination Market:  Singapore (SFA) (Tuas Mega Port / Pasir Panjang, Singapore)\nStatutory Framework: Sale of Food Act — Singapore Food Regulations (Reg 5, Reg 9 & Eighth Schedule)\nCustoms Verdict:     Cleared for Export\nReadiness Score:     100% (100% — Ready to print & ship (7 fixes ap"
+    },
+    "check6": {
+      "pass": true,
+      "mobileTargetMetrics": {
+        "scrollWidthInitial": 390,
+        "targets": {
+          "Download Customs Report (.txt)": {
+            "width": 263,
+            "height": 46
+          },
+          "Sticker Focus": {
+            "width": 118,
+            "height": 44
+          },
+          "Side-by-Side Proof": {
+            "width": 153,
+            "height": 44
+          },
+          "Inspect Corridor": {
+            "width": 151,
+            "height": 46
+          }
+        },
+        "stickerTopBeforeToggle": 2467,
+        "originTopBeforeToggle": 2933
+      },
+      "mobileAfterToggle": {
+        "scrollWidth": 390,
+        "originOrder": "-1",
+        "stickerTopAfterToggle": 1161,
+        "originTopAfterToggle": 465
+      },
+      "scrollWidthMobileAfterCorridor": 390,
+      "focusResults": [
+        {
+          "control": "Download Customs Report (.txt)",
+          "text": "Download Customs Report (.txt)",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "control": "Side-by-Side Proof",
+          "text": "Side-by-Side Proof",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        },
+        {
+          "control": "Inspect Corridor (Australia)",
+          "text": "Inspect Corridor",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px",
+          "outlineColor": "rgb(29, 66, 104)"
+        }
+      ],
+      "marketAfterKbEnter": "AU_FSANZ"
+    }
+  },
+  "sprint01Edges": {
+    "edge1": {
+      "pass": true,
+      "matrixCountWhenCleared": 0,
+      "emptyStateVisible": true,
+      "matrixVisibleAfterReloadSku": true
+    },
+    "edge2": {
+      "pass": true,
+      "errOnInspectCorridorServing": "Serving size must be greater than 0g.",
+      "focusOnInspectCorridorServing": "serving-size",
+      "marketStayedSg": "SG_SFA",
+      "errOnDownloadReportServing": "Serving size must be greater than 0g.",
+      "focusOnDownloadReportServing": "serving-size",
+      "errOnInspectCorridorIngredients": "Please enter at least one ingredient on the label.",
+      "focusOnInspectCorridorIngredients": "ingredient-list",
+      "preservedProductName": "Bali Crispy Prawn & Candlenut Sambal",
+      "errOnDownloadReportIngredients": "Please enter at least one ingredient on the label.",
+      "focusOnDownloadReportIngredients": "ingredient-list"
+    }
+  },
+  "bugReverifications": {
+    "bug1_svgWrappingAndParens": {
+      "pass": true
+    }
+  },
+  "sliceRegression": {
+    "loadMs": 1612,
+    "customEditPass": true,
+    "svgDownloadPass": true,
+    "copyDossierPass": true,
+    "fallbackPass": true,
+    "persistencePass": true,
+    "hugeInputNoOverflow": true
+  },
+  "svgTextAudit": {
+    "ex1": {
+      "expectedProductName": "Bali Crispy Prawn & Candlenut Sambal",
+      "hasFullProductNameBefore": true,
+      "hasFullProductNameAfter": true,
+      "hasStrayParenSpaceAfter": false,
+      "skuCorridorRows": [
+        "Singapore (SFA)\nHold: Relabel Required\n16% (5 critical, 2 warning)\nTop finding: Singapore SFA: Prohibited therapeutic claim (\"Boosts Immunity\") on front of pack\nActive Corridor",
+        "Australia (FSANZ)\nHold: Relabel Required\n14% (6 critical, 1 warning)\nTop finding: Undeclared or unbolded mandatory allergens (Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean)\nInspect Corridor",
+        "Japan (CAA)\nHold: Relabel Required\n22% (6 critical, 1 warning)\nTop finding: Nutrition table missing mandatory Per 100g column & Salt Equivalent (食塩相当量 3.94 g / 100g)\nInspect Corridor"
+      ],
+      "beforeRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Singapore SFA",
+        "Bali Crispy Prawn & Candlenut Sambal",
+        "Net: 180 g",
+        "Product of Indonesia • Traditional Balinese Recipe •",
+        "Naturally Low Sugar • Boosts Immunity & Digestive Wellness",
+        "• 100% Preservative Free",
+        "Ingredients: Red chili peppers (42%), shallots, palm",
+        "olein, belacan (fermented shrimp paste), kemiri",
+        "(candlenut), gula melaka (palm sugar), garlic, kicap manis",
+        "(sweet soy sauce), monosodium glutamate, sodium benzoate.",
+        "Contains: No allergen summary declared on origin label.",
+        "Nutrition Information",
+        "Per 20 g",
+        "Per 100g",
+        "Energy",
+        "68 kcal (285 kJ)",
+        "340 kcal (1423 kJ)",
+        "Protein",
+        "1.8 g",
+        "9 g",
+        "Total Fat (Sat.)",
+        "4.6 g (1.9 g)",
+        "23 g (9.5 g)",
+        "Carbohydrate",
+        "4.8 g",
+        "24 g",
+        "Total Sugars",
+        "3.4 g",
+        "17 g",
+        "Sodium",
+        "310 mg",
+        "1550 mg",
+        "Salt Equivalent",
+        "0.79 g",
+        "3.94 g",
+        "Importer block missing on origin pack",
+        "Storage: Store in a cool dry place. Refrigerate after",
+        "opening.",
+        "Customs Proof Status: Hold: Relabel Required (16%)"
+      ],
+      "afterRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Singapore SFA",
+        "Bali Crispy Prawn & Candlenut Sambal",
+        "Net: 180 g",
+        "Product of Indonesia • Authentic Indonesia Craft Export",
+        "Ingredients: Red chili peppers (42%), shallots, palm",
+        "olein, fermented shrimp paste (Crustacean: Shrimp),",
+        "candlenut (Tree Nut: Candlenut), gula melaka (palm",
+        "sugar), garlic, sweet soy sauce (Soybean, Wheat), Flavour",
+        "Enhancer (INS 621, Monosodium Glutamate), Preservative",
+        "(INS 211, Sodium Benzoate).",
+        "Contains: Crustacean (Shrimp / Prawn), Tree Nuts",
+        "(Candlenut), Soybean.",
+        "Nutrition Information",
+        "Per 20 g",
+        "Per 100g",
+        "Energy",
+        "68 kcal (285 kJ)",
+        "340 kcal (1423 kJ)",
+        "Protein",
+        "1.8 g",
+        "9 g",
+        "Total Fat (Sat.)",
+        "4.6 g (1.9 g)",
+        "23 g (9.5 g)",
+        "Carbohydrate",
+        "4.8 g",
+        "24 g",
+        "Total Sugars",
+        "3.4 g",
+        "17 g",
+        "Sodium",
+        "310 mg",
+        "1550 mg",
+        "Salt Equivalent",
+        "0.79 g",
+        "3.94 g",
+        "Imported by: Straits Pantry Imports Pte. Ltd., 14 Fishery",
+        "Port Rd, Singapore 619736",
+        "Storage: Store in a cool dry place. Refrigerate after",
+        "opening.",
+        "Customs Proof Status: Cleared for Export (100%)"
+      ]
+    },
+    "ex2": {
+      "expectedProductName": "Chiang Mai Golden Mango & Coconut Nectar Drink",
+      "hasFullProductNameBefore": true,
+      "hasFullProductNameAfter": true,
+      "hasStrayParenSpaceAfter": false,
+      "skuCorridorRows": [
+        "Singapore (SFA)\nHold: Relabel Required\n16% (5 critical, 2 warning)\nTop finding: Singapore SFA Nutri-Grade Grade C front-of-pack sugar mark (9.8% sugar) required\nInspect Corridor",
+        "Australia (FSANZ)\nHold: Relabel Required\n19% (5 critical, 2 warning)\nTop finding: Australia FSANZ PEAL prohibits generic \"nuts\" and \"dairy\" terms in allergen statements\nActive Corridor",
+        "Japan (CAA)\nHold: Relabel Required\n22% (6 critical, 1 warning)\nTop finding: Japan CAA requires statutory synthetic tar-dye designation \"Yellow No. 4 (黄色4号)\" for Tartrazine\nInspect Corridor"
+      ],
+      "beforeRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Australia FSANZ",
+        "Chiang Mai Golden Mango & Coconut",
+        "Nectar Drink",
+        "Net: 330 mL",
+        "Product of Thailand • Low Sugar Tropical Refresher • Cures",
+        "Fatigue & Prevents Cold Flu • Rich in Natural Vitamins",
+        "Ingredients: Water, Nam Dok Mai mango puree (28%), coconut",
+        "cream (14%), cane sugar, cashew milk paste, whey protein",
+        "isolate, citric acid, tartrazine, sodium metabisulfite.",
+        "May contain nuts and dairy.",
+        "Nutrition Information",
+        "Per 250 mL",
+        "Per 100mL",
+        "Energy",
+        "165 kcal (690 kJ)",
+        "66 kcal (276 kJ)",
+        "Protein",
+        "2.5 g",
+        "1 g",
+        "Total Fat (Sat.)",
+        "4.2 g (3.5 g)",
+        "1.7 g (1.4 g)",
+        "Carbohydrate",
+        "29.5 g",
+        "11.8 g",
+        "Total Sugars",
+        "24.5 g",
+        "9.8 g",
+        "Sodium",
+        "85 mg",
+        "34 mg",
+        "Salt Equivalent",
+        "0.22 g",
+        "0.09 g",
+        "Importer block missing on origin pack",
+        "Storage: Keep chilled between 2°C and 4°C. Shake well before",
+        "drinking.",
+        "Customs Proof Status: Hold: Relabel Required (19%)"
+      ],
+      "afterRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Australia FSANZ",
+        "Chiang Mai Golden Mango & Coconut",
+        "Nectar Drink",
+        "Net: 330 mL",
+        "Product of Thailand • Authentic Thailand Craft Export",
+        "Ingredients: Water, Nam Dok Mai mango puree (28%), coconut",
+        "cream (14%), cane sugar, cashew milk paste, whey protein",
+        "isolate, Acidity Regulator (INS 330, Citric Acid), Colour",
+        "(INS 102, Tartrazine), Preservative / Antioxidant (INS",
+        "223, Sodium Metabisulphite).",
+        "Contains: Tree Nuts (Cashew), Milk / Dairy, Added",
+        "Sulphites (>10 mg/kg).",
+        "Nutrition Information",
+        "Per 250 mL",
+        "Per 100mL",
+        "Energy",
+        "165 kcal (690 kJ)",
+        "66 kcal (276 kJ)",
+        "Protein",
+        "2.5 g",
+        "1 g",
+        "Total Fat (Sat.)",
+        "4.2 g (3.5 g)",
+        "1.7 g (1.4 g)",
+        "Carbohydrate",
+        "29.5 g",
+        "11.8 g",
+        "Total Sugars",
+        "24.5 g",
+        "9.8 g",
+        "Sodium",
+        "85 mg",
+        "34 mg",
+        "Salt Equivalent",
+        "0.22 g",
+        "0.09 g",
+        "Imported by: Southern Cross Fine Foods Pty Ltd, 88 Docklands",
+        "Hwy, Melbourne VIC 3008, Australia",
+        "Storage: Keep chilled between 2°C and 4°C. Shake well before",
+        "drinking.",
+        "Customs Proof Status: Cleared for Export (100%)"
+      ]
+    },
+    "ex3": {
+      "expectedProductName": "Saigon Matcha, Roasted Cashew & Sesame Oat Bar",
+      "hasFullProductNameBefore": true,
+      "hasFullProductNameAfter": true,
+      "hasStrayParenSpaceAfter": false,
+      "skuCorridorRows": [
+        "Singapore (SFA)\nHold: Relabel Required\n16% (5 critical, 2 warning)\nTop finding: Singapore SFA: Prohibited therapeutic claim (\"Medical Grade\") on front of pack\nInspect Corridor",
+        "Australia (FSANZ)\nHold: Relabel Required\n14% (6 critical, 1 warning)\nTop finding: Undeclared or unbolded mandatory allergens (Tree Nuts (Cashew), Soybean, Cereals containing Gluten (Oats), Egg, Sesame)\nInspect Corridor",
+        "Japan (CAA)\nHold: Relabel Required\n22% (6 critical, 1 warning)\nTop finding: \"High Protein\" claim below Japan CAA minimum (6.9g / 100g vs. >= 16.2g / 100g required)\nActive Corridor"
+      ],
+      "beforeRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Japan CAA",
+        "Saigon Matcha, Roasted Cashew &",
+        "Sesame Oat Bar",
+        "Net: 45 g",
+        "Product of Vietnam • High Protein Energy Bar • Medical",
+        "Grade Anti-Inflammatory Superfood • Zero Salt Formula",
+        "Ingredients: Rolled oats (38%), Binh Phuoc roasted cashews",
+        "(22%), honey, black sesame seeds, coconut oil, Uji matcha",
+        "powder (4%), soy lecithin, egg white powder, potassium",
+        "sorbate.",
+        "Contains: No allergen summary declared on origin label.",
+        "Nutrition Information",
+        "Per 45 g",
+        "Per 100g",
+        "Energy",
+        "198 kcal (828 kJ)",
+        "440 kcal (1841 kJ)",
+        "Protein",
+        "3.1 g",
+        "6.9 g",
+        "Total Fat (Sat.)",
+        "9.4 g (3.2 g)",
+        "20.9 g (7.1 g)",
+        "Carbohydrate",
+        "25.2 g",
+        "56 g",
+        "Total Sugars",
+        "11.2 g",
+        "24.9 g",
+        "Sodium",
+        "140 mg",
+        "311 mg",
+        "Salt Equivalent",
+        "0.36 g",
+        "0.79 g",
+        "Importer block missing on origin pack",
+        "Storage: Keep away from direct sunlight and high humidity.",
+        "Customs Proof Status: Hold: Relabel Required (22%)"
+      ],
+      "afterRawTextNodes": [
+        "Die-Cut Export Over-Sticker • 88 mm × 112 mm • Japan CAA",
+        "Saigon Matcha, Roasted Cashew &",
+        "Sesame Oat Bar",
+        "Net: 45 g",
+        "Product of Vietnam • Authentic Vietnam Craft Export",
+        "Ingredients: Rolled oats (38%), Binh Phuoc roasted cashews",
+        "(22%), honey, black sesame seeds, coconut oil, Uji matcha",
+        "powder (4%), Emulsifier (INS 322, Soy Lecithin), egg white",
+        "powder, Preservative (INS 202, Potassium Sorbate).",
+        "Contains: Tree Nuts (Cashew), Soybean, Cereals containing",
+        "Gluten (Oats), Egg, Sesame.",
+        "Nutrition Information",
+        "Per 45 g",
+        "Per 100g",
+        "Energy",
+        "198 kcal (828 kJ)",
+        "440 kcal (1841 kJ)",
+        "Protein",
+        "3.1 g",
+        "6.9 g",
+        "Total Fat (Sat.)",
+        "9.4 g (3.2 g)",
+        "20.9 g (7.1 g)",
+        "Carbohydrate",
+        "25.2 g",
+        "56 g",
+        "Total Sugars",
+        "11.2 g",
+        "24.9 g",
+        "Sodium",
+        "140 mg",
+        "311 mg",
+        "Salt Equivalent",
+        "0.36 g",
+        "0.79 g",
+        "Imported by: Minato Mirai Trading K.K., 2-4-1 Kaigan,",
+        "Minato-ku, Tokyo 105-0022, Japan",
+        "Storage: Keep away from direct sunlight and high humidity.",
+        "Customs Proof Status: Cleared for Export (100%)"
+      ]
+    }
+  },
+  "consoleErrors": [],
+  "badRequests": []
+}

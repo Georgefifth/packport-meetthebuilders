@@ -1,0 +1,83 @@
+{
+  "url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "at": "2026-11-26T00:39:39.750Z",
+  "viewports": {
+    "desktop": {
+      "loadMs": 2626,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "PackPort — APAC Food & Beverage Export Label Pre-Flight Inspector",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 1440,
+      "totalChars": 7498,
+      "small12Share": 0,
+      "small14Share": 0,
+      "monoShare": 0.013470258735662844,
+      "lowContrastShare": 0,
+      "upperShare": 0.10781115879828326,
+      "families": [
+        [
+          "Libre Franklin",
+          7107
+        ],
+        [
+          "Newsreader",
+          290
+        ],
+        [
+          "Azeret Mono",
+          101
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 34,
+      "smallTargets": 0,
+      "unnamedInteractive": 0,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 149
+    },
+    "mobile": {
+      "loadMs": 2718,
+      "consoleErrors": [],
+      "badRequests": [],
+      "title": "PackPort — APAC Food & Beverage Export Label Pre-Flight Inspector",
+      "lang": "en",
+      "h1": 1,
+      "overflowX": false,
+      "scrollWidth": 390,
+      "totalChars": 7498,
+      "small12Share": 0,
+      "small14Share": 0,
+      "monoShare": 0.013470258735662844,
+      "lowContrastShare": 0,
+      "upperShare": 0.10781115879828326,
+      "families": [
+        [
+          "Libre Franklin",
+          7107
+        ],
+        [
+          "Newsreader",
+          290
+        ],
+        [
+          "Azeret Mono",
+          101
+        ]
+      ],
+      "jargonCount": 0,
+      "jargonSamples": [],
+      "worstContrast": [],
+      "interactiveCount": 34,
+      "smallTargets": 0,
+      "unnamedInteractive": 0,
+      "imgsNoAlt": 0,
+      "wordsAboveFold": 67
+    }
+  },
+  "findings": []
+}

@@ -1,0 +1,10 @@
+# Real-input fixtures
+
+Only for products that process user input (files, text, URLs, images). Written and frozen BEFORE running them.
+Use public, licensed sources the builder did not author. Include cases the product should reject or flag nothing on.
+
+- Case 1 (typical): source https://world.openfoodfacts.org/product/0089686010947/indomie-mi-goreng-instant-stir-fry-noodles | licence ODbL 1.0 (Open Food Facts) | expected Flags undeclared/unbolded wheat, soy, and sesame allergens, maps monosodium glutamate (INS 621), tartrazine (INS 102), and sodium metabisulfite (INS 223), and flags missing Per-100g nutrition column for Singapore (SFA) (`Hold: Relabel Required`), then resolves to `100% Cleared for Export`.
+- Case 2 (typical): source https://world.openfoodfacts.org/product/8850987101083/mogu-mogu-lychee-flavored-drink-with-nata-de-coco | licence ODbL 1.0 (Open Food Facts) | expected Flags false "Low Sugar" claim (12.5g/100mL vs <=2.5g/100mL liquid cap), maps citric acid (INS 330) and sodium benzoate (INS 211), and flags missing Per-100mL + kilojoule (kJ) column for Australia (FSANZ).
+- Case 3 (hard): source https://world.openfoodfacts.org/product/3017620422003/nutella-ferrero | licence ODbL 1.0 (Open Food Facts) | expected Detects milk/whey and soy lecithin (INS 322), flags "High Protein" claim below Japan CAA >=16.2g/100g threshold (actual 6.0g/100g), and computes Salt Equivalent (0.11g/100g) for Japan (CAA).
+- Case 4 (edge: empty, huge, malformed): source constructed: boundary validation (blank ingredients, -10g serving size, and 5,000-character ingredient payload) | expected Returns HTTP 400 with `field: "ingredientList"` on blank ingredients, HTTP 400 with `field: "servingSizeAmount"` on `-10g` serving size, and HTTP 200 in under 1000ms with valid SVG on the 5,000-character payload.
+- Case 5 (negative: should produce no finding): source https://world.openfoodfacts.org/product/8852646000018/organic-hom-mali-brown-rice | licence ODbL 1.0 (Open Food Facts) | expected Returns 0 findings (`criticalCount: 0, warningCount: 0`), `100%` readiness score, and `Cleared for Export` on initial inspection with zero fixes needed.
