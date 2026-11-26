@@ -29,6 +29,9 @@ Every label a user will read, written the way they would say it. No internal nam
 | `per_100g_conversion` | **Per 100g / 100mL column (required alongside per-serving values)** | Nutrition facts table |
 | `ins_additive_mapping` | **Add international additive code (e.g., Preservative INS 211)** | Ingredient finding card |
 | `remediated_svg_sticker` | **Print-Ready Export Over-Sticker (88 mm × 112 mm)** | Right-column proof tab & download button |
+| `corridor_comparison_matrix` | **Multi-Corridor Readiness Comparison (Singapore SFA vs. Australia FSANZ vs. Japan CAA)** | Dossier comparison table |
+| `proof_view_mode_toggle` | **Side-by-Side Proof / Sticker Focus** | Proof layout toggle buttons |
+| `download_dossier_report` | **Download Customs Report (.txt)** | Dossier action bar |
 | `agent_pipeline_trace` | **How Google Gemini & Statutory Rules Checked This Label** | Expandable verification footer |
 
 ## States

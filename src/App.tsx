@@ -6,7 +6,9 @@ import {
   SAMPLE_SKUS,
 } from './lib/sampleSkus';
 import {
+  buildCustomsReportText,
   buildExportStickerSvgString,
+  computeMultiCorridorComparison,
   InspectionResult,
   inspectLabelDeterministic,
 } from './lib/regulatoryEngine';
@@ -111,6 +113,9 @@ export function App() {
   }>({ field: null, message: '' });
   const [actionConfirmation, setActionConfirmation] = useState<string>('');
   const [engineNotice, setEngineNotice] = useState<string>('');
+  const [proofViewMode, setProofViewMode] = useState<
+    'sticker-focus' | 'side-by-side'
+  >('sticker-focus');
 
   const [result, setResult] = useState<InspectionResult>(() =>
     inspectLabelDeterministic(label, resolvedIds)
@@ -281,6 +286,51 @@ export function App() {
     setActionConfirmation('Copied customs dossier to clipboard.');
   };
 
+  const handleDownloadReportTxt = () => {
+    const validationError = validateLabelInput(label);
+    if (validationError) {
+      setFieldError(validationError);
+      focusInvalidField(validationError.field);
+      return;
+    }
+    const reportText = buildCustomsReportText(label, result);
+    const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const safeSlug = (label.productName || 'packport-report')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-');
+    a.download = `${safeSlug}-${label.destinationMarket.toLowerCase()}-report.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setActionConfirmation('Downloaded customs inspection report (.txt).');
+  };
+
+  const handleSwitchCorridor = (nextMarket: DestinationMarket) => {
+    const validationError = validateLabelInput(label);
+    if (validationError) {
+      setFieldError(validationError);
+      focusInvalidField(validationError.field);
+      return;
+    }
+    const nextLabel: LabelInput = {
+      ...label,
+      destinationMarket: nextMarket,
+    };
+    setLabel(nextLabel);
+    setResolvedIds([]);
+    void executeInspection(nextLabel, []);
+  };
+
+  const corridorRows = computeMultiCorridorComparison(
+    label,
+    label.destinationMarket,
+    resolvedIds
+  );
+
   const stickerSvgMarkup = buildExportStickerSvgString(result);
 
   const claimFindings = result.findings.filter(
@@ -301,7 +351,7 @@ export function App() {
     <div className="page-shell">
       <header className="masthead">
         <div className="masthead-dateline">
-          <span>APAC Export Label Ledger</span>
+          <span>APAC Export Ledger</span>
           <span>Singapore (SFA) • Australia (FSANZ) • Japan (CAA)</span>
         </div>
         <div className="masthead-title-row">
@@ -760,7 +810,7 @@ export function App() {
             <>
               <div className="verdict-summary-bar">
                 <div className="readiness-score-block">
-                  <p className="readiness-eyebrow">Customs Readiness Score</p>
+                  <p className="readiness-eyebrow">Readiness Score</p>
                   <div className="readiness-number-row">
                     <span className="readiness-big-num">
                       {result.readinessScore}%
@@ -796,6 +846,13 @@ export function App() {
                 <button
                   type="button"
                   className="secondary-btn outline"
+                  onClick={handleDownloadReportTxt}
+                >
+                  Download Customs Report (.txt)
+                </button>
+                <button
+                  type="button"
+                  className="secondary-btn outline"
                   onClick={handleCopyDossier}
                 >
                   Copy Customs Dossier
@@ -815,7 +872,9 @@ export function App() {
                   </div>
                 )}
 
-                <div className="proof-comparison-grid">
+                <div
+                  className={`proof-comparison-grid ${proofViewMode === 'side-by-side' ? 'side-by-side' : ''}`}
+                >
                   {/* Live Print-Ready Export Over-Sticker (Signature Element First) */}
                   <div
                     data-testid="export-over-sticker"
@@ -839,9 +898,41 @@ export function App() {
 
                   {/* Redlined Origin Label Proof */}
                   <div className="origin-proof-card">
-                    <h3 className="origin-proof-title">
-                      Redlined Origin Package Proof
-                    </h3>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '12px',
+                        paddingBottom: '8px',
+                        borderBottom: '1px solid var(--rule)',
+                      }}
+                    >
+                      <h3
+                        className="origin-proof-title"
+                        style={{ margin: 0, paddingBottom: 0, borderBottom: 'none' }}
+                      >
+                        Redlined Origin Package Proof
+                      </h3>
+                      <div className="proof-view-bar" style={{ marginBottom: 0 }}>
+                        <button
+                          type="button"
+                          className={`sample-btn ${proofViewMode === 'sticker-focus' ? 'active' : ''}`}
+                          onClick={() => setProofViewMode('sticker-focus')}
+                        >
+                          Sticker Focus
+                        </button>
+                        <button
+                          type="button"
+                          className={`sample-btn ${proofViewMode === 'side-by-side' ? 'active' : ''}`}
+                          onClick={() => setProofViewMode('side-by-side')}
+                        >
+                          Side-by-Side Proof
+                        </button>
+                      </div>
+                    </div>
 
                     <div
                       className={`origin-proof-section ${claimFindings.some((f) => !f.resolved) ? 'flagged' : ''}`}
@@ -916,6 +1007,61 @@ export function App() {
                     </div>
                   </div>
                 </div>
+
+                {/* Multi-Corridor Readiness Comparison Table */}
+                <section
+                  className="corridor-comparison-box"
+                  data-testid="corridor-comparison-table"
+                  aria-label="Multi-Corridor Readiness Comparison"
+                >
+                  <h3 className="findings-section-title" style={{ marginTop: 0 }}>
+                    Multi-Corridor Readiness Comparison (Singapore SFA vs. Australia FSANZ vs. Japan CAA)
+                  </h3>
+                  <div className="corridor-cards-list">
+                    {corridorRows.map((row) => (
+                      <div
+                        key={row.market}
+                        className={`corridor-row-card ${row.isActive ? 'active' : ''}`}
+                        data-testid={`corridor-row-${row.market}`}
+                      >
+                        <div className="corridor-row-main">
+                          <div className="corridor-row-header">
+                            <strong style={{ fontSize: '16px' }}>
+                              {row.marketName}
+                            </strong>
+                            <span
+                              className={`severity-badge ${row.verdictStamp === 'Cleared for Export' ? 'resolved' : 'critical'}`}
+                            >
+                              {row.verdictStamp}
+                            </span>
+                            <span className="corridor-score-pill">
+                              {row.readinessScore}% ({row.criticalCount} critical,{' '}
+                              {row.warningCount} warning)
+                            </span>
+                          </div>
+                          <div className="corridor-blocker-text">
+                            Top finding: {row.topBlocker}
+                          </div>
+                        </div>
+                        <div className="corridor-row-action">
+                          {row.isActive ? (
+                            <span className="active-corridor-badge">
+                              Active Corridor
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              className="secondary-btn outline"
+                              onClick={() => handleSwitchCorridor(row.market)}
+                            >
+                              Inspect Corridor
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
 
                 {/* Itemized Statutory Findings */}
                 <h3 className="findings-section-title">

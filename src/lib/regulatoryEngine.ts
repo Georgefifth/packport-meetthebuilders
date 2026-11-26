@@ -862,6 +862,96 @@ export function inspectLabelDeterministic(
   };
 }
 
+export interface CorridorComparisonRow {
+  market: DestinationMarket;
+  marketName: string;
+  shortName: string;
+  isActive: boolean;
+  readinessScore: number;
+  verdictStamp: 'Hold: Relabel Required' | 'Cleared for Export';
+  criticalCount: number;
+  warningCount: number;
+  topBlocker: string;
+}
+
+export function computeMultiCorridorComparison(
+  input: LabelInput,
+  activeDestination: DestinationMarket,
+  activeResolvedIds: string[] = []
+): CorridorComparisonRow[] {
+  const markets: DestinationMarket[] = ['SG_SFA', 'AU_FSANZ', 'JP_CAA'];
+  return markets.map((m) => {
+    const isActive = m === activeDestination;
+    const res = inspectLabelDeterministic(
+      { ...input, destinationMarket: m },
+      isActive ? activeResolvedIds : []
+    );
+    const firstUnresolved = res.findings.find((f) => !f.resolved);
+    return {
+      market: m,
+      marketName: MARKET_META[m].name,
+      shortName: MARKET_META[m].shortName,
+      isActive,
+      readinessScore: res.readinessScore,
+      verdictStamp: res.verdictStamp,
+      criticalCount: res.criticalCount,
+      warningCount: res.warningCount,
+      topBlocker: firstUnresolved
+        ? firstUnresolved.title
+        : 'All statutory requirements met — ready to print & ship',
+    };
+  });
+}
+
+export function buildCustomsReportText(
+  input: LabelInput,
+  result: InspectionResult
+): string {
+  const s = result.remediatedSticker;
+  const lines: string[] = [
+    '========================================================================',
+    'PACKPORT — APAC EXPORT CUSTOMS PRE-FLIGHT INSPECTION REPORT',
+    '========================================================================',
+    `Product Name:        ${input.productName}`,
+    `Origin Country:      ${input.originCountry}`,
+    `Destination Market:  ${result.destinationMeta.name} (${result.destinationMeta.portName})`,
+    `Statutory Framework: ${result.destinationMeta.statutoryCitation}`,
+    `Customs Verdict:     ${result.verdictStamp}`,
+    `Readiness Score:     ${result.readinessScore}% (${result.readinessMeaning})`,
+    '',
+    '--- 1. STATUTORY NUTRITION BASIS (PER SERVING VS. PER ' +
+      result.per100.basisUnit.toUpperCase() +
+      ') ---',
+    `Serving Size:        ${s.perServing.servingLabel}`,
+    `Energy:              ${s.perServing.energyKcal} kcal (${s.perServing.energyKj} kJ) per serving | ${s.per100.energyKcal} kcal (${s.per100.energyKj} kJ) per ${s.per100.basisUnit}`,
+    `Protein:             ${s.perServing.proteinG} g per serving | ${s.per100.proteinG} g per ${s.per100.basisUnit}`,
+    `Total Fat (Sat.):    ${s.perServing.totalFatG} g (${s.perServing.saturatedFatG} g) per serving | ${s.per100.totalFatG} g (${s.per100.saturatedFatG} g) per ${s.per100.basisUnit}`,
+    `Carbohydrate:        ${s.perServing.carbsG} g per serving | ${s.per100.carbsG} g per ${s.per100.basisUnit}`,
+    `Total Sugars:        ${s.perServing.totalSugarsG} g per serving | ${s.per100.totalSugarsG} g per ${s.per100.basisUnit}`,
+    `Sodium:              ${s.perServing.sodiumMg} mg per serving | ${s.per100.sodiumMg} mg per ${s.per100.basisUnit}`,
+    `Salt Equivalent:     ${s.perServing.saltEquivalentG} g per serving | ${s.per100.saltEquivalentG} g per ${s.per100.basisUnit}`,
+    '',
+    `--- 2. ITEMIZED STATUTORY FINDINGS (${result.findings.length}) ---`,
+    ...result.findings.map(
+      (f) =>
+        `[#${f.pinNumber}] ${f.resolved ? 'RESOLVED' : f.severityLabel.toUpperCase()}: ${f.title}\n` +
+        `    Regulation: ${f.statutoryCitation}\n` +
+        `    Flagged Text: ${f.offendingText}\n` +
+        `    Remediation: ${f.proposedFixSummary}`
+    ),
+    '',
+    '--- 3. PRINT-READY EXPORT OVER-STICKER COPY (88 mm x 112 mm) ---',
+    `Header:       ${s.productName} | Net: ${s.netContent}`,
+    `Origin/Claim: ${s.originLine} • ${s.compliantClaims.join(' • ')}`,
+    `Ingredients:  ${s.formattedIngredientsPlain}`,
+    `Allergens:    ${s.containsSummary}`,
+    `Importer:     ${s.importerBlock}`,
+    `Storage:      ${s.storageInstructions}`,
+    '========================================================================',
+  ];
+  return lines.join('\n');
+}
+
 interface RichWord {
   text: string;
   bold: boolean;

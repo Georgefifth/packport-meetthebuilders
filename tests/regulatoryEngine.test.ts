@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  buildCustomsReportText,
   buildExportStickerSvgString,
+  computeMultiCorridorComparison,
   computePer100,
   detectAdditives,
   detectAllergens,
@@ -72,5 +74,25 @@ describe('PackPort APAC Regulatory Rule Engine', () => {
     expect(res.verdictStamp).toBe('Hold: Relabel Required');
     expect(res.findings.some((f) => f.id === 'finding-high-protein-threshold')).toBe(true);
     expect(res.findings.some((f) => f.id === 'finding-zero-salt-threshold')).toBe(true);
+  });
+
+  it('computes multi-corridor comparison across SG_SFA, AU_FSANZ, and JP_CAA and builds plain-text customs report', () => {
+    const sambal = SAMPLE_SKUS[0];
+    const initial = inspectLabelDeterministic(sambal, []);
+    const rowsBefore = computeMultiCorridorComparison(sambal, 'SG_SFA', []);
+    expect(rowsBefore).toHaveLength(3);
+    expect(rowsBefore[0].marketName).toBe('Singapore (SFA)');
+    expect(rowsBefore[0].isActive).toBe(true);
+    expect(rowsBefore[0].verdictStamp).toBe('Hold: Relabel Required');
+
+    const allIds = initial.findings.map((f) => f.id);
+    const rowsAfter = computeMultiCorridorComparison(sambal, 'SG_SFA', allIds);
+    expect(rowsAfter[0].readinessScore).toBe(100);
+    expect(rowsAfter[0].verdictStamp).toBe('Cleared for Export');
+
+    const reportTxt = buildCustomsReportText(sambal, inspectLabelDeterministic(sambal, allIds));
+    expect(reportTxt).toContain('PACKPORT — APAC EXPORT CUSTOMS PRE-FLIGHT INSPECTION REPORT');
+    expect(reportTxt).toContain('Bali Crispy Prawn & Candlenut Sambal');
+    expect(reportTxt).toContain('Cleared for Export');
   });
 });
