@@ -2,7 +2,7 @@
 
 Executed against `https://dimensional-glance-icons-bible.trycloudflare.com/api/inspect-label` using the frozen definitions in `evaluation/fixtures.md`.
 
-| Case | Result | What happened |
+| Fixture | Outcome | What happened |
 |---|---|---|
 | case 1 | PASS | HTTP 200 (501ms): Detected Soybean, Wheat / Gluten, Sesame, Added Sulphites (>10 mg/kg); mapped INS 223, INS 621, INS 102; flagged 4 findings (Hold: Relabel Required) and resolved to 100% (Cleared for Export). |
 | case 2 | PASS | HTTP 200 (64ms): Computed 12.5g/100mL sugar (exceeding <=2.5g/100mL liquid cap) and 222 kJ/100mL; mapped INS 211, INS 330; flagged 4 Australia FSANZ findings. |
