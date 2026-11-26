@@ -78,13 +78,34 @@ describe('PackPort APAC Regulatory Rule Engine', () => {
 
   it('computes multi-corridor comparison across SG_SFA, AU_FSANZ, and JP_CAA and builds plain-text customs report', () => {
     const sambal = SAMPLE_SKUS[0];
-    const initial = inspectLabelDeterministic(sambal, []);
     const rowsBefore = computeMultiCorridorComparison(sambal, 'SG_SFA', []);
     expect(rowsBefore).toHaveLength(3);
     expect(rowsBefore[0].marketName).toBe('Singapore (SFA)');
     expect(rowsBefore[0].isActive).toBe(true);
     expect(rowsBefore[0].verdictStamp).toBe('Hold: Relabel Required');
+    // Verify distinct readiness scores & top blockers across corridors
+    const scores = new Set(rowsBefore.map((r) => r.readinessScore));
+    expect(scores.size).toBe(3);
+    const blockers = new Set(rowsBefore.map((r) => r.topBlocker));
+    expect(blockers.size).toBe(3);
 
+    // Verify all 3 example SKUs render full untruncated titles and no space inside parentheses
+    for (const sku of SAMPLE_SKUS) {
+      const res = inspectLabelDeterministic(sku, []);
+      const svgInitial = buildExportStickerSvgString(res);
+      expect(svgInitial).not.toContain('( ');
+      expect(svgInitial).not.toContain(' )');
+      const allIds = res.findings.map((f) => f.id);
+      const resFixed = inspectLabelDeterministic(sku, allIds);
+      const svgFixed = buildExportStickerSvgString(resFixed);
+      expect(svgFixed).not.toContain('( ');
+      expect(svgFixed).not.toContain(' )');
+      for (const word of sku.productName.replace('&', '&amp;').split(' ')) {
+        expect(svgFixed).toContain(word);
+      }
+    }
+
+    const initial = inspectLabelDeterministic(sambal, []);
     const allIds = initial.findings.map((f) => f.id);
     const rowsAfter = computeMultiCorridorComparison(sambal, 'SG_SFA', allIds);
     expect(rowsAfter[0].readinessScore).toBe(100);

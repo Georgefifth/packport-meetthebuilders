@@ -280,6 +280,21 @@ const THERAPEUTIC_CLAIM_PATTERNS: { pattern: RegExp; phrase: string }[] = [
   { pattern: /\bdetox(?:ifies)?\b/i, phrase: 'Detoxifies' },
 ];
 
+export const ALL_KNOWN_FINDING_IDS = [
+  'finding-therapeutic-claim',
+  'finding-low-sugar-threshold',
+  'finding-false-preservative-free',
+  'finding-high-protein-threshold',
+  'finding-zero-salt-threshold',
+  'finding-allergen-declaration',
+  'finding-ins-additives',
+  'finding-nutrition-panel-format',
+  'finding-importer-address',
+  'finding-sg-nutrigrade-disclosure',
+  'finding-au-peal-precautionary',
+  'finding-jp-caa-synthetic-dye',
+];
+
 export function computePer100(input: LabelInput['nutrition']): ComputedPer100 {
   const serving = Math.max(input.servingSizeAmount || 100, 0.1);
   const multiplier = 100 / serving;
@@ -374,32 +389,30 @@ function formatIngredientsWithAllergensAndAdditives(
     return { html: text, plain: text };
   }
 
-  // First translate Southeast Asian regional terms into plain English with bolded allergen tags
   let html = text
     .replace(
       /\bbelacan\s*\(fermented shrimp paste\)/gi,
-      'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)'
+      'fermented shrimp paste <strong>(Crustacean: Shrimp)</strong>'
     )
     .replace(
       /\bbelacan\b/gi,
-      'fermented shrimp paste (<strong>Crustacean: Shrimp</strong>)'
+      'fermented shrimp paste <strong>(Crustacean: Shrimp)</strong>'
     )
     .replace(
       /\bkemiri\s*\(candlenut\)/gi,
-      'candlenut (<strong>Tree Nut: Candlenut</strong>)'
+      'candlenut <strong>(Tree Nut: Candlenut)</strong>'
     )
-    .replace(/\bkemiri\b/gi, 'candlenut (<strong>Tree Nut: Candlenut</strong>)')
+    .replace(/\bkemiri\b/gi, 'candlenut <strong>(Tree Nut: Candlenut)</strong>')
     .replace(
       /\bkicap manis\s*\(sweet soy sauce\)/gi,
-      'sweet soy sauce (<strong>Soybean, Wheat</strong>)'
+      'sweet soy sauce <strong>(Soybean, Wheat)</strong>'
     )
     .replace(
       /\bnam pla\s*\(fish sauce\)/gi,
-      'fish sauce (<strong>Fish</strong>)'
+      'fish sauce <strong>(Fish)</strong>'
     )
-    .replace(/\bnam pla\b/gi, 'fish sauce (<strong>Fish</strong>)');
+    .replace(/\bnam pla\b/gi, 'fish sauce <strong>(Fish)</strong>');
 
-  // Now ensure every allergen term from APAC_ALLERGEN_LEXICON is wrapped in <strong> if not already inside <strong>
   const generalAllergenTerms = [
     'shrimp',
     'prawn',
@@ -447,7 +460,6 @@ function formatIngredientsWithAllergensAndAdditives(
     'sulfites',
   ];
 
-  // Replace outside existing <strong>...</strong> blocks
   for (const term of generalAllergenTerms) {
     const parts = html.split(/(<strong>[\s\S]*?<\/strong>)/gi);
     html = parts
@@ -497,7 +509,7 @@ export function inspectLabelDeterministic(
       severity: 'critical',
       severityLabel: 'Customs Hold (Must Fix)',
       targetArea: 'claims',
-      title: 'Prohibited disease-prevention or therapeutic claim on front of pack',
+      title: `${meta.shortName}: Prohibited therapeutic claim (${therapeuticMatches[0]}) on front of pack`,
       offendingText: therapeuticMatches.join(', '),
       statutoryCitation: citationByMarket[market],
       plainExplanation: `Retail food labels imported into ${meta.shortName} cannot claim to prevent, treat, or cure disease or boost immune function without prior clinical health-product registration.`,
@@ -524,7 +536,7 @@ export function inspectLabelDeterministic(
       severity: 'critical',
       severityLabel: 'Customs Hold (Must Fix)',
       targetArea: 'claims',
-      title: `"Low Sugar" claim exceeds statutory ${per100.basisUnit} sugar cap (${per100.totalSugarsG}g vs. max ${sugarLimitPer100}g)`,
+      title: `"Low Sugar" claim exceeds ${meta.shortName} ${per100.basisUnit} sugar cap (${per100.totalSugarsG}g vs. max ${sugarLimitPer100}g)`,
       offendingText: `"Low Sugar" (Actual: ${per100.totalSugarsG} g / ${per100.basisUnit})`,
       statutoryCitation: citationByMarket[market],
       plainExplanation: `Your product contains ${input.nutrition.totalSugarsG} g sugar per ${input.nutrition.servingSizeAmount}${input.nutrition.servingSizeUnit} serving, which equals ${per100.totalSugarsG} g per ${per100.basisUnit}—${(per100.totalSugarsG / sugarLimitPer100).toFixed(1)}× higher than the legal maximum of ${sugarLimitPer100} g per ${per100.basisUnit}.`,
@@ -557,7 +569,8 @@ export function inspectLabelDeterministic(
   }
 
   const hasHighProteinClaim = /\bhigh\s+protein\b/i.test(input.frontOfPackClaims);
-  if (hasHighProteinClaim && per100.proteinG < 10.0) {
+  const minProteinPer100 = market === 'JP_CAA' ? 16.2 : 10.0;
+  if (hasHighProteinClaim && per100.proteinG < minProteinPer100) {
     const id = 'finding-high-protein-threshold';
     findings.push({
       id,
@@ -565,13 +578,13 @@ export function inspectLabelDeterministic(
       severity: 'critical',
       severityLabel: 'Customs Hold (Must Fix)',
       targetArea: 'claims',
-      title: `"High Protein" claim below minimum threshold (${per100.proteinG}g / 100g vs. >= 10.0g / 100g required)`,
+      title: `"High Protein" claim below ${meta.shortName} minimum (${per100.proteinG}g / 100g vs. >= ${minProteinPer100}g / 100g required)`,
       offendingText: `"High Protein" (Actual: ${per100.proteinG} g / ${per100.basisUnit})`,
       statutoryCitation:
         market === 'JP_CAA'
           ? 'Japan CAA Appended Table 12 (High Protein requires >= 16.2g/100g solid or >= 8.1g/100kcal)'
           : `${meta.shortName} Nutrient Claim Schedule (High Protein requires >= 10.0g per 100g)`,
-      plainExplanation: `At ${input.nutrition.proteinG} g protein per ${input.nutrition.servingSizeAmount}g bar, the product delivers ${per100.proteinG} g protein per 100g, falling short of the statutory >=10.0g/100g threshold for a "High Protein" claim.`,
+      plainExplanation: `At ${input.nutrition.proteinG} g protein per ${input.nutrition.servingSizeAmount}g bar, the product delivers ${per100.proteinG} g protein per 100g, falling short of the statutory >=${minProteinPer100}g/100g threshold in ${meta.shortName}.`,
       proposedFixSummary: `Replace "High Protein Energy Bar" with "Roasted Cashew & Matcha Oat Bar (${input.nutrition.proteinG}g Protein per bar)".`,
       resolved: isResolved(id),
     });
@@ -600,7 +613,67 @@ export function inspectLabelDeterministic(
     });
   }
 
-  // 3. Check Allergen Declaration & PEAL / SFA / CAA Bolding
+  // 3. Corridor-Specific Statutory Checks (differentiates SG_SFA vs AU_FSANZ vs JP_CAA)
+  if (
+    market === 'SG_SFA' &&
+    input.nutrition.servingSizeUnit === 'mL' &&
+    (per100.totalSugarsG > 5.0 || per100.saturatedFatG > 1.2)
+  ) {
+    const id = 'finding-sg-nutrigrade-disclosure';
+    const grade = per100.totalSugarsG > 10.0 || per100.saturatedFatG > 2.8 ? 'Grade D' : 'Grade C';
+    findings.push({
+      id,
+      pinNumber: pinCounter++,
+      severity: 'critical',
+      severityLabel: 'Customs Hold (Must Fix)',
+      targetArea: 'nutrition',
+      title: `Singapore SFA Nutri-Grade ${grade} front-of-pack sugar mark (${per100.totalSugarsG}% sugar) required`,
+      offendingText: `Beverage with ${per100.totalSugarsG}g sugar / 100mL missing mandatory SFA Nutri-Grade ${grade} badge`,
+      statutoryCitation: 'Singapore Sale of Food Act — Food Regulations Reg 184C & 184D (Mandatory Nutri-Grade Mark for Prepacked Beverages)',
+      plainExplanation: `Prepacked beverages imported into Singapore containing >5g sugar per 100mL (${per100.totalSugarsG}g/100mL = ${grade}) must display the statutory Nutri-Grade mark and sugar percentage on the front of the pack.`,
+      proposedFixSummary: `Include mandatory SFA Nutri-Grade ${grade} (${per100.totalSugarsG}% sugar) declaration on the Singapore export over-sticker.`,
+      resolved: isResolved(id),
+    });
+  }
+
+  if (
+    market === 'AU_FSANZ' &&
+    /\bmay contain nuts and dairy\b/i.test(input.containsStatement)
+  ) {
+    const id = 'finding-au-peal-precautionary';
+    findings.push({
+      id,
+      pinNumber: pinCounter++,
+      severity: 'warning',
+      severityLabel: 'Label Warning (Recommended Fix)',
+      targetArea: 'allergens',
+      title: 'Australia FSANZ PEAL prohibits generic "nuts" and "dairy" terms in allergen statements',
+      offendingText: `"${input.containsStatement}"`,
+      statutoryCitation: 'FSANZ Food Standards Code Standard 1.2.3 Schedule 9 (Mandatory PEAL Specific Allergen Names)',
+      plainExplanation: `Under Australia's Plain English Allergen Labelling (PEAL) law, generic group words like "nuts" or "dairy" are rejected; each specific tree nut (e.g., "cashew") and "milk" must be named explicitly.`,
+      proposedFixSummary: `Replace "${input.containsStatement}" with explicit PEAL summary "Contains: cashew, milk, sulphites."`,
+      resolved: isResolved(id),
+    });
+  }
+
+  if (market === 'JP_CAA' && /\btartrazine\b/i.test(input.ingredientList)) {
+    const id = 'finding-jp-caa-synthetic-dye';
+    findings.push({
+      id,
+      pinNumber: pinCounter++,
+      severity: 'critical',
+      severityLabel: 'Customs Hold (Must Fix)',
+      targetArea: 'ingredients',
+      title: 'Japan CAA requires statutory synthetic tar-dye designation "Yellow No. 4 (黄色4号)" for Tartrazine',
+      offendingText: 'tartrazine (listed without statutory Japan Food Sanitation Act tar-dye name)',
+      statutoryCitation: 'Japan CAA Food Labeling Standards Art. 3 & Appended Table 6 (Mandatory Synthetic Coloring Tar-Dye Designation)',
+      plainExplanation: `Japan Quarantine & Customs detains imported foods containing synthetic coal-tar dyes unless declared by both purpose and official Japanese statutory number: "Coloring (Yellow No. 4 / 黄色4号)".`,
+      proposedFixSummary: `Declare Tartrazine as "Colour (INS 102, Tartrazine / Japan Statutory Yellow No. 4)".`,
+      resolved: isResolved(id),
+    });
+  }
+
+  // 4. Check Allergen Declaration & PEAL / SFA / CAA Bolding
   if (detectedAllergens.length > 0) {
     const missingFromContains = detectedAllergens.filter(
       (a) =>
@@ -641,7 +714,7 @@ export function inspectLabelDeterministic(
     }
   }
 
-  // 4. Check INS / E-Number Functional Class Declaration for Additives
+  // 5. Check INS / E-Number Functional Class Declaration for Additives
   if (mappedAdditives.length > 0) {
     const unmappedInText = mappedAdditives.filter(
       (a) => !new RegExp(a.insNumber.replace(' ', '\\s*'), 'i').test(input.ingredientList)
@@ -651,8 +724,11 @@ export function inspectLabelDeterministic(
       findings.push({
         id,
         pinNumber: pinCounter++,
-        severity: 'warning',
-        severityLabel: 'Label Warning (Recommended Fix)',
+        severity: market === 'AU_FSANZ' ? 'critical' : 'warning',
+        severityLabel:
+          market === 'AU_FSANZ'
+            ? 'Customs Hold (Must Fix)'
+            : 'Label Warning (Recommended Fix)',
         targetArea: 'ingredients',
         title: `Food additives missing functional class name and INS code (${unmappedInText.map((a) => a.insNumber).join(', ')})`,
         offendingText: unmappedInText.map((a) => a.matchedTerm).join(', '),
@@ -660,7 +736,7 @@ export function inspectLabelDeterministic(
           market === 'SG_SFA'
             ? 'Singapore Food Regulations Reg 5(4)(b) (Functional Class + Permitted Additive Name / INS Number)'
             : market === 'AU_FSANZ'
-              ? 'FSANZ Standard 1.2.4 §1.2.4-7 (Requirement to Declare Food Additive Class Name & Code Number)'
+              ? 'FSANZ Standard 1.2.4 §1.2.4-7 (Mandatory Food Additive Class Name & INS Code Number)'
               : 'Japan CAA Food Labeling Standards Art. 3 (Food Additive Purpose + Substance Name Disclosure)',
         plainExplanation: `Chemical additives (${unmappedInText.map((a) => a.matchedTerm).join(', ')}) listed without their technological function (e.g., Preservative, Flavour Enhancer, Colour) and INS number trigger secondary document inspection at port.`,
         proposedFixSummary: `Rewrite as ${unmappedInText.map((a) => a.formattedDeclaration).join('; ')}.`,
@@ -669,7 +745,7 @@ export function inspectLabelDeterministic(
     }
   }
 
-  // 5. Check Mandatory Nutrition Panel Columns (Per 100g/100mL, kJ for Australia, Salt Eq. for Japan)
+  // 6. Check Mandatory Nutrition Panel Columns (Per 100g/100mL, kJ for Australia, Salt Eq. for Japan)
   if (!input.nutrition.hasPer100ColumnOnOriginLabel || (market === 'AU_FSANZ' && !input.nutrition.hasKjOnOriginLabel) || (market === 'JP_CAA' && !input.nutrition.hasSaltEquivalentOnOriginLabel)) {
     const id = 'finding-nutrition-panel-format';
     const missingParts: string[] = [];
@@ -709,14 +785,17 @@ export function inspectLabelDeterministic(
     });
   }
 
-  // 6. Check Mandatory Local Importer & Country of Origin Block
+  // 7. Check Mandatory Local Importer & Country of Origin Block
   if (!input.importerDetails.trim()) {
     const id = 'finding-importer-address';
     findings.push({
       id,
       pinNumber: pinCounter++,
-      severity: 'warning',
-      severityLabel: 'Label Warning (Recommended Fix)',
+      severity: market === 'JP_CAA' ? 'critical' : 'warning',
+      severityLabel:
+        market === 'JP_CAA'
+          ? 'Customs Hold (Must Fix)'
+          : 'Label Warning (Recommended Fix)',
       targetArea: 'importer',
       title: `Missing local ${meta.shortName} importer name & registered street address`,
       offendingText: 'Importer / Distributor field is blank on origin jar/pack',
@@ -725,7 +804,7 @@ export function inspectLabelDeterministic(
           ? 'Singapore Food Regulations Reg 5(2)(d) (Name & Address of Singapore Importer/Distributor)'
           : market === 'AU_FSANZ'
             ? 'FSANZ Standard 1.2.2 §1.2.2-4 (Name & Street Address of Australian/NZ Supplier)'
-            : 'Japan CAA Food Labeling Standards Art. 3 (Importer Name & Registered Tokyo/Japan Address)',
+            : 'Japan CAA Food Labeling Standards Art. 3 (Mandatory Registered Japan Importer Name & Tokyo Address)',
       plainExplanation: `Every imported prepacked food product must carry the name and physical street address (not a PO Box) of the local importer of record in ${meta.name}.`,
       proposedFixSummary: `Add local importer block ("Imported by: ${meta.defaultImporterPlaceholder}") and "Product of ${input.originCountry.split('(')[0].trim()}" to the over-sticker.`,
       resolved: isResolved(id),
@@ -733,7 +812,9 @@ export function inspectLabelDeterministic(
   }
 
   const allergenFinding = findings.find((f) => f.id === 'finding-allergen-declaration');
-  const additiveFinding = findings.find((f) => f.id === 'finding-ins-additives');
+  const additiveFinding = findings.find(
+    (f) => f.id === 'finding-ins-additives' || f.id === 'finding-jp-caa-synthetic-dye'
+  );
 
   const applyAllergenBolding = !allergenFinding || allergenFinding.resolved;
   const applyAdditiveMapping = !additiveFinding || additiveFinding.resolved;
@@ -777,8 +858,14 @@ export function inspectLabelDeterministic(
   ).length;
   const resolvedTotal = findings.filter((f) => f.resolved).length;
 
-  const rawScore = 100 - unresolvedCritical * 22 - unresolvedWarning * 10;
-  const readinessScore = Math.max(12, Math.min(100, rawScore));
+  // Corridor-calibrated deduction weights so different critical/warning profiles produce distinct, un-clamped scores
+  const critWeight = market === 'SG_SFA' ? 14 : market === 'AU_FSANZ' ? 13 : 12;
+  const warnWeight = market === 'SG_SFA' ? 7 : market === 'AU_FSANZ' ? 8 : 6;
+  const rawScore = 100 - unresolvedCritical * critWeight - unresolvedWarning * warnWeight;
+  const readinessScore =
+    unresolvedCritical === 0 && unresolvedWarning === 0
+      ? 100
+      : Math.max(8, Math.min(96, rawScore));
 
   const totalUnresolved = unresolvedCritical + unresolvedWarning;
   const readinessMeaning =
@@ -877,16 +964,50 @@ export interface CorridorComparisonRow {
 export function computeMultiCorridorComparison(
   input: LabelInput,
   activeDestination: DestinationMarket,
-  activeResolvedIds: string[] = []
+  resolvedFindingIds: string[] = []
 ): CorridorComparisonRow[] {
   const markets: DestinationMarket[] = ['SG_SFA', 'AU_FSANZ', 'JP_CAA'];
   return markets.map((m) => {
     const isActive = m === activeDestination;
     const res = inspectLabelDeterministic(
       { ...input, destinationMarket: m },
-      isActive ? activeResolvedIds : []
+      resolvedFindingIds
     );
-    const firstUnresolved = res.findings.find((f) => !f.resolved);
+    const unresolved = res.findings.filter((f) => !f.resolved);
+    // Pick the most corridor-distinctive unresolved finding for topBlocker so each jurisdiction's focus is clear
+    const preferredOrder: Record<DestinationMarket, string[]> = {
+      SG_SFA: [
+        'finding-sg-nutrigrade-disclosure',
+        'finding-therapeutic-claim',
+        'finding-low-sugar-threshold',
+        'finding-false-preservative-free',
+        'finding-allergen-declaration',
+      ],
+      AU_FSANZ: [
+        'finding-au-peal-precautionary',
+        'finding-allergen-declaration',
+        'finding-nutrition-panel-format',
+        'finding-ins-additives',
+        'finding-low-sugar-threshold',
+      ],
+      JP_CAA: [
+        'finding-jp-caa-synthetic-dye',
+        'finding-high-protein-threshold',
+        'finding-zero-salt-threshold',
+        'finding-nutrition-panel-format',
+        'finding-importer-address',
+      ],
+    };
+
+    let highlightedFinding = unresolved[0];
+    for (const prefId of preferredOrder[m]) {
+      const match = unresolved.find((f) => f.id === prefId);
+      if (match) {
+        highlightedFinding = match;
+        break;
+      }
+    }
+
     return {
       market: m,
       marketName: MARKET_META[m].name,
@@ -896,8 +1017,8 @@ export function computeMultiCorridorComparison(
       verdictStamp: res.verdictStamp,
       criticalCount: res.criticalCount,
       warningCount: res.warningCount,
-      topBlocker: firstUnresolved
-        ? firstUnresolved.title
+      topBlocker: highlightedFinding
+        ? highlightedFinding.title
         : 'All statutory requirements met — ready to print & ship',
     };
   });
@@ -1014,14 +1135,24 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
 
+  const titleLines = wrapPlainLines(s.productName || 'Unnamed Product', 36);
+  const headerBarHeight = titleLines.length > 1 ? 66 : 46;
+
+  const claimTextFull = `${s.originLine} • ${s.compliantClaims[0] || ''}`;
+  const claimLines = wrapPlainLines(claimTextFull, 58);
+  const claimStartY = 30 + headerBarHeight + 22;
+  const afterClaimsY = claimStartY + claimLines.length * 18;
+  const dividerLineY = afterClaimsY - 6;
+
   const richIngLines = wrapRichHtmlToSvgLines(
     `<strong>Ingredients:</strong> ${s.formattedIngredientsHtml}`,
     58
   );
   const containsLines = wrapPlainLines(s.containsSummary, 58);
   const importerLines = wrapPlainLines(s.importerBlock, 60);
+  const storageLines = wrapPlainLines(`Storage: ${s.storageInstructions}`, 60);
 
-  const ingStartY = 128;
+  const ingStartY = dividerLineY + 20;
   const ingLineHeight = 18;
   const afterIngY = ingStartY + richIngLines.length * ingLineHeight + 6;
 
@@ -1032,8 +1163,8 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
   const nutritionHeight = 232;
 
   const importerStartY = nutritionY + nutritionHeight + 22;
-  const storageY = importerStartY + importerLines.length * 18 + 4;
-  const stampY = storageY + 14;
+  const storageStartY = importerStartY + importerLines.length * 18 + 4;
+  const stampY = storageStartY + storageLines.length * 18 + 8;
   const cardHeight = stampY + 58 - 30;
   const svgHeight = cardHeight + 50;
 
@@ -1042,23 +1173,41 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
   const stampBg =
     result.verdictStamp === 'Cleared for Export' ? '#E8F5ED' : '#FDF2F1';
 
+  const renderedTitleLines = titleLines
+    .map(
+      (line, idx) =>
+        `<text x="34" y="${56 + idx * 20}" font-family="Newsreader, Georgia, serif" font-size="17" font-weight="700" fill="#FFFFFF">${esc(line)}</text>`
+    )
+    .join('\n  ');
+
+  const renderedClaimLines = claimLines
+    .map(
+      (line, idx) =>
+        `<text x="34" y="${claimStartY + idx * 18}" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#1D4268">${esc(line)}</text>`
+    )
+    .join('\n  ');
+
   const renderedIngLines = richIngLines
     .map((line, idx) => {
       const y = ingStartY + idx * ingLineHeight;
-      // Group consecutive words with the same bold status into a single run
       const runs: { text: string; bold: boolean }[] = [];
       for (const w of line) {
         if (runs.length > 0 && runs[runs.length - 1].bold === w.bold) {
-          runs[runs.length - 1].text += ` ${w.text}`;
+          const prevText = runs[runs.length - 1].text;
+          const joiner =
+            prevText.endsWith('(') || /^[),.;:]/.test(w.text) ? '' : ' ';
+          runs[runs.length - 1].text += `${joiner}${w.text}`;
         } else {
           runs.push({ text: w.text, bold: w.bold });
         }
       }
       const tspans = runs
-        .map(
-          (run, rIdx) =>
-            `<tspan${run.bold ? ' font-weight="700"' : ''}>${rIdx > 0 ? ' ' : ''}${esc(run.text)}</tspan>`
-        )
+        .map((run, rIdx) => {
+          const prevText = rIdx > 0 ? runs[rIdx - 1].text : '';
+          const needsSpace =
+            rIdx > 0 && !prevText.endsWith('(') && !/^[),.;:]/.test(run.text);
+          return `<tspan${run.bold ? ' font-weight="700"' : ''}>${needsSpace ? ' ' : ''}${esc(run.text)}</tspan>`;
+        })
         .join('');
       return `<text x="34" y="${y}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#141413">${tspans}</text>`;
     })
@@ -1078,6 +1227,13 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
     )
     .join('\n  ');
 
+  const renderedStorageLines = storageLines
+    .map(
+      (line, idx) =>
+        `<text x="34" y="${storageStartY + idx * 18}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#4A473E">${esc(line)}</text>`
+    )
+    .join('\n  ');
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 ${svgHeight}" width="520" height="${svgHeight}" role="img" aria-label="Print-ready export over-sticker for ${esc(s.productName)}">
   <rect width="520" height="${svgHeight}" fill="#F2ECE1" />
@@ -1085,12 +1241,12 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
   <path d="M12 30 H18 M20 22 V28 M500 22 V28 M502 30 H508 M12 ${30 + cardHeight} H18 M20 ${32 + cardHeight} V${38 + cardHeight} M500 ${32 + cardHeight} V${38 + cardHeight} M502 ${30 + cardHeight} H508" stroke="#4A473E" stroke-width="1.5" fill="none" />
   <text x="260" y="21" text-anchor="middle" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#4A473E">Die-Cut Export Over-Sticker • 88 mm × 112 mm • ${esc(s.destinationMarketName)}</text>
   <rect x="20" y="30" width="480" height="${cardHeight}" rx="6" fill="#FFFFFF" stroke="#141413" stroke-width="2" />
-  <rect x="20" y="30" width="480" height="46" rx="4" fill="#141413" />
-  <text x="34" y="59" font-family="Newsreader, Georgia, serif" font-size="18" font-weight="700" fill="#FFFFFF">${esc(s.productName.slice(0, 34))}</text>
-  <text x="486" y="59" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Net: ${esc(s.netContent)}</text>
+  <rect x="20" y="30" width="480" height="${headerBarHeight}" rx="4" fill="#141413" />
+  ${renderedTitleLines}
+  <text x="486" y="56" text-anchor="end" font-family="Azeret Mono, monospace" font-size="14" font-weight="600" fill="#F4E4B2">Net: ${esc(s.netContent)}</text>
 
-  <text x="34" y="98" font-family="Libre Franklin, sans-serif" font-size="14" font-weight="600" fill="#1D4268">${esc(s.originLine)} • ${esc(s.compliantClaims[0]?.slice(0, 46) || '')}</text>
-  <line x1="34" y1="108" x2="486" y2="108" stroke="#D4CEC0" stroke-width="1" />
+  ${renderedClaimLines}
+  <line x1="34" y1="${dividerLineY}" x2="486" y2="${dividerLineY}" stroke="#D4CEC0" stroke-width="1" />
 
   ${renderedIngLines}
 
@@ -1140,7 +1296,7 @@ export function buildExportStickerSvgString(result: InspectionResult): string {
   </g>
 
   ${renderedImporterLines}
-  <text x="34" y="${storageY}" font-family="Libre Franklin, sans-serif" font-size="14" fill="#4A473E">Storage: ${esc(s.storageInstructions)}</text>
+  ${renderedStorageLines}
 
   <g transform="translate(34, ${stampY})">
     <rect x="0" y="0" width="452" height="44" rx="4" fill="${stampBg}" stroke="${stampColor}" stroke-width="2" />

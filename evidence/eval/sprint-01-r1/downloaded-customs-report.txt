@@ -1,0 +1,58 @@
+========================================================================
+PACKPORT — APAC EXPORT CUSTOMS PRE-FLIGHT INSPECTION REPORT
+========================================================================
+Product Name:        Bali Crispy Prawn & Candlenut Sambal
+Origin Country:      Indonesia (Denpasar, Bali)
+Destination Market:  Singapore (SFA) (Tuas Mega Port / Pasir Panjang, Singapore)
+Statutory Framework: Sale of Food Act — Singapore Food Regulations (Reg 5, Reg 9 & Eighth Schedule)
+Customs Verdict:     Cleared for Export
+Readiness Score:     100% (100% — Ready to print & ship (7 fixes applied))
+
+--- 1. STATUTORY NUTRITION BASIS (PER SERVING VS. PER 100G) ---
+Serving Size:        20 g
+Energy:              68 kcal (285 kJ) per serving | 340 kcal (1423 kJ) per 100g
+Protein:             1.8 g per serving | 9 g per 100g
+Total Fat (Sat.):    4.6 g (1.9 g) per serving | 23 g (9.5 g) per 100g
+Carbohydrate:        4.8 g per serving | 24 g per 100g
+Total Sugars:        3.4 g per serving | 17 g per 100g
+Sodium:              310 mg per serving | 1550 mg per 100g
+Salt Equivalent:     0.79 g per serving | 3.94 g per 100g
+
+--- 2. ITEMIZED STATUTORY FINDINGS (7) ---
+[#1] RESOLVED: Prohibited disease-prevention or therapeutic claim on front of pack
+    Regulation: Singapore Food Regulations Reg 9(1) & Reg 9B (Prohibited Medical/Therapeutic Claims)
+    Flagged Text: "Boosts Immunity"
+    Remediation: Remove "Boosts Immunity" from the front-of-pack marketing copy on the export over-sticker.
+[#2] RESOLVED: "Low Sugar" claim exceeds statutory 100g sugar cap (17g vs. max 5g)
+    Regulation: Singapore Food Regulations Eighth Schedule (Low Sugar <= 5.0g/100g solid or <= 2.5g/100mL liquid)
+    Flagged Text: "Low Sugar" (Actual: 17 g / 100g)
+    Remediation: Strike the "Low Sugar" claim from the export over-sticker and declare exact Total Sugars (17 g / 100g).
+[#3] RESOLVED: "Preservative Free" claim contradicts declared chemical preservative in ingredients
+    Regulation: Singapore SFA False & Misleading Labelling Prohibition (SFA Reg 9 / FSANZ Consumer Law / CAA Art. 5)
+    Flagged Text: "100% Preservative Free" vs. Sodium Benzoate
+    Remediation: Cover the "100% Preservative Free" claim with the export over-sticker and declare Preservative (INS 211).
+[#4] RESOLVED: Undeclared or unbolded mandatory allergens (Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean)
+    Regulation: Singapore Food Regulations Reg 5(4)(ea) (Mandatory Hypersensitivity Allergen Declaration)
+    Flagged Text: No "Contains:" allergen statement on label (Detected: belacan, kemiri, kicap)
+    Remediation: Bold crustacean (shrimp), tree nuts (candlenut), soy inline in the ingredient list and add "Contains: Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean."
+[#5] RESOLVED: Food additives missing functional class name and INS code (INS 211, INS 621)
+    Regulation: Singapore Food Regulations Reg 5(4)(b) (Functional Class + Permitted Additive Name / INS Number)
+    Flagged Text: sodium benzoate, monosodium glutamate
+    Remediation: Rewrite as Preservative (INS 211, Sodium Benzoate); Flavour Enhancer (INS 621, Monosodium Glutamate).
+[#6] RESOLVED: Nutrition table missing mandatory Per 100g column
+    Regulation: Singapore Food Regulations Reg 8A & Twelfth Schedule (Per-Serving + Per-100g/100mL Nutrition Information Panel)
+    Flagged Text: Origin panel only shows Per-Serving (20g) values in kcal / mg Na
+    Remediation: Generate a dual-column Nutrition Information Panel (Per 20g Serving & Per 100g) with 1423 kJ and 3.94 g Salt Equivalent.
+[#7] RESOLVED: Missing local Singapore SFA importer name & registered street address
+    Regulation: Singapore Food Regulations Reg 5(2)(d) (Name & Address of Singapore Importer/Distributor)
+    Flagged Text: Importer / Distributor field is blank on origin jar/pack
+    Remediation: Add local importer block ("Imported by: Straits Pantry Imports Pte. Ltd., 14 Fishery Port Rd, Singapore 619736") and "Product of Indonesia" to the over-sticker.
+
+--- 3. PRINT-READY EXPORT OVER-STICKER COPY (88 mm x 112 mm) ---
+Header:       Bali Crispy Prawn & Candlenut Sambal | Net: 180 g
+Origin/Claim: Product of Indonesia • Authentic Indonesia Craft Export • 68 kcal (285 kJ) per 20g serving
+Ingredients:  Red chili peppers (42%), shallots, palm olein, fermented shrimp paste (Crustacean: Shrimp), candlenut (Tree Nut: Candlenut), gula melaka (palm sugar), garlic, sweet soy sauce (Soybean, Wheat), Flavour Enhancer (INS 621, Monosodium Glutamate), Preservative (INS 211, Sodium Benzoate).
+Allergens:    Contains: Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean.
+Importer:     Imported by: Straits Pantry Imports Pte. Ltd., 14 Fishery Port Rd, Singapore 619736
+Storage:      Store in a cool dry place. Refrigerate after opening.
+========================================================================

@@ -6,6 +6,7 @@ import {
   SAMPLE_SKUS,
 } from './lib/sampleSkus';
 import {
+  ALL_KNOWN_FINDING_IDS,
   buildCustomsReportText,
   buildExportStickerSvgString,
   computeMultiCorridorComparison,
@@ -250,12 +251,14 @@ export function App() {
       focusInvalidField(validationError.field);
       return;
     }
-    const allIds = result.findings.map((f) => f.id);
+    const allIds = Array.from(
+      new Set([...ALL_KNOWN_FINDING_IDS, ...result.findings.map((f) => f.id)])
+    );
     setResolvedIds(allIds);
     const updated = inspectLabelDeterministic(label, allIds);
     setResult(updated);
     setActionConfirmation(
-      `Applied all ${allIds.length} regulatory fixes — Export over-sticker is now Cleared for Export (100%).`
+      `Applied all ${result.findings.length} regulatory fixes — Export over-sticker is now Cleared for Export (100%).`
     );
   };
 
@@ -321,8 +324,7 @@ export function App() {
       destinationMarket: nextMarket,
     };
     setLabel(nextLabel);
-    setResolvedIds([]);
-    void executeInspection(nextLabel, []);
+    void executeInspection(nextLabel, resolvedIds);
   };
 
   const corridorRows = computeMultiCorridorComparison(
@@ -352,7 +354,7 @@ export function App() {
       <header className="masthead">
         <div className="masthead-dateline">
           <span>APAC Export Ledger</span>
-          <span>Singapore (SFA) • Australia (FSANZ) • Japan (CAA)</span>
+          <span>SFA · FSANZ · CAA</span>
         </div>
         <div className="masthead-title-row">
           <div>
@@ -367,7 +369,7 @@ export function App() {
       </header>
 
       <section className="sample-strip" aria-label="Example APAC export SKUs">
-        <p className="sample-strip-label">Instant Demo SKUs:</p>
+        <p className="sample-strip-label">Demo SKUs:</p>
         <div className="sample-buttons-row">
           {SAMPLE_SKUS.map((sku) => (
             <button
@@ -423,9 +425,8 @@ export function App() {
                         destinationMarket: nextMarket,
                       };
                       setLabel(nextLabel);
-                      setResolvedIds([]);
                       if (!isCleared && validateLabelInput(nextLabel) === null) {
-                        void executeInspection(nextLabel, []);
+                        void executeInspection(nextLabel, resolvedIds);
                       }
                     }}
                   >
@@ -873,6 +874,42 @@ export function App() {
                 )}
 
                 <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '10px',
+                    marginBottom: '12px',
+                    paddingBottom: '8px',
+                    borderBottom: '1px solid var(--rule)',
+                  }}
+                >
+                  <h3
+                    className="origin-proof-title"
+                    style={{ margin: 0, paddingBottom: 0, borderBottom: 'none' }}
+                  >
+                    Print-Ready Export Over-Sticker (88×112 mm)
+                  </h3>
+                  <div className="proof-view-bar" style={{ marginBottom: 0 }}>
+                    <button
+                      type="button"
+                      className={`sample-btn ${proofViewMode === 'sticker-focus' ? 'active' : ''}`}
+                      onClick={() => setProofViewMode('sticker-focus')}
+                    >
+                      Sticker Focus
+                    </button>
+                    <button
+                      type="button"
+                      className={`sample-btn ${proofViewMode === 'side-by-side' ? 'active' : ''}`}
+                      onClick={() => setProofViewMode('side-by-side')}
+                    >
+                      Side-by-Side Proof
+                    </button>
+                  </div>
+                </div>
+
+                <div
                   className={`proof-comparison-grid ${proofViewMode === 'side-by-side' ? 'side-by-side' : ''}`}
                 >
                   {/* Live Print-Ready Export Over-Sticker (Signature Element First) */}
@@ -881,9 +918,6 @@ export function App() {
                     data-sticker-verdict={result.verdictStamp}
                     data-sticker-contains={result.remediatedSticker.containsSummary}
                   >
-                    <h3 className="origin-proof-title">
-                      Print-Ready Export Over-Sticker (88 mm × 112 mm)
-                    </h3>
                     <div
                       className="sticker-svg-wrapper"
                       style={{ maxWidth: '520px', margin: '0 auto' }}
@@ -898,41 +932,9 @@ export function App() {
 
                   {/* Redlined Origin Label Proof */}
                   <div className="origin-proof-card">
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        gap: '8px',
-                        marginBottom: '12px',
-                        paddingBottom: '8px',
-                        borderBottom: '1px solid var(--rule)',
-                      }}
-                    >
-                      <h3
-                        className="origin-proof-title"
-                        style={{ margin: 0, paddingBottom: 0, borderBottom: 'none' }}
-                      >
-                        Redlined Origin Package Proof
-                      </h3>
-                      <div className="proof-view-bar" style={{ marginBottom: 0 }}>
-                        <button
-                          type="button"
-                          className={`sample-btn ${proofViewMode === 'sticker-focus' ? 'active' : ''}`}
-                          onClick={() => setProofViewMode('sticker-focus')}
-                        >
-                          Sticker Focus
-                        </button>
-                        <button
-                          type="button"
-                          className={`sample-btn ${proofViewMode === 'side-by-side' ? 'active' : ''}`}
-                          onClick={() => setProofViewMode('side-by-side')}
-                        >
-                          Side-by-Side Proof
-                        </button>
-                      </div>
-                    </div>
+                    <h3 className="origin-proof-title">
+                      Redlined Origin Package Proof
+                    </h3>
 
                     <div
                       className={`origin-proof-section ${claimFindings.some((f) => !f.resolved) ? 'flagged' : ''}`}
