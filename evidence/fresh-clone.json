@@ -1,0 +1,12 @@
+{
+  "status": "ok",
+  "commit": "5f7c50a866a4b75b4c4ed39222076b4bf536e2bf",
+  "source": "https://github.com/Georgefifth/packport-meetthebuilders",
+  "steps": [
+    "install: ok",
+    "build: ok",
+    "start: ok (http://localhost:5173 answers 200)",
+    "probe: ok"
+  ],
+  "at": "2026-11-26T00:54:37+00:00"
+}

@@ -1,0 +1,169 @@
+{
+  "url": "https://dimensional-glance-icons-bible.trycloudflare.com",
+  "sliceChecks": {
+    "check1": {
+      "pass": true,
+      "loadMs": 1169,
+      "pitchVisible": true,
+      "skuButtonsCount": 3,
+      "primaryCtaVisible": true,
+      "defaultScoreText": "16%\n— 7 fixes needed before export",
+      "stampText": "Hold: Relabel Required"
+    },
+    "check3": {
+      "pass": true,
+      "count": 7
+    },
+    "check4": {
+      "pass": true,
+      "scoreAfterAllFixes": "100%\n— Ready to print & ship (7 fixes applied)",
+      "stampAfterAllFixes": "Cleared for Export"
+    },
+    "check6": {
+      "pass": true,
+      "svgFilename": "bali-crispy-prawn-candlenut-sambal-sg_sfa.svg",
+      "svgBanner": "Downloaded compliant over-sticker SVG.",
+      "copyBanner": "Copied customs dossier to clipboard."
+    },
+    "check2": {
+      "pass": true,
+      "auStatus": 200,
+      "jpStatus": 200,
+      "auPinsCount": 6,
+      "jpPinsCount": 6
+    },
+    "check5": {
+      "pass": true,
+      "has60gSugarPer100g": true
+    },
+    "check7": {
+      "pass": true,
+      "scrollWidth": 390,
+      "svgWidth": 334,
+      "svgFitsViewport": true
+    },
+    "check8": {
+      "pass": true,
+      "tabStops": [
+        {
+          "tag": "BUTTON",
+          "text": "Example: Bali Crispy Prawn Sambal → Singapore (SFA",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Example: Chiang Mai Mango Drink → Australia (FSANZ",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Example: Saigon Matcha Oat Bar → Japan (CAA)",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Clear Form",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        },
+        {
+          "tag": "SELECT",
+          "text": "Singapore (SFA)\nAustralia (FSANZ)\nJapan (CAA)",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        },
+        {
+          "tag": "INPUT",
+          "text": "origin-country",
+          "outlineStyle": "solid",
+          "outlineWidth": "3px"
+        }
+      ],
+      "marketAfterKbEnter": "AU_FSANZ"
+    }
+  },
+  "sliceEdges": {
+    "edge1": {
+      "pass": true,
+      "emptyStateVisible": true
+    },
+    "edge2": {
+      "pass": true,
+      "ingredientErrorText": "Please enter at least one ingredient on the label.",
+      "servingErrorOnInspectCorridor": "Serving size must be greater than 0g."
+    },
+    "edge3": {
+      "pass": true,
+      "fallbackBanner": "Completed inspection using the built-in statutory rule engine so your work is safe (simulated upstream fallback).",
+      "fallbackFindingsCount": 7
+    }
+  },
+  "sprint01Checks": {
+    "check1": {
+      "pass": true,
+      "distinctScores": [
+        "16",
+        "14",
+        "22"
+      ],
+      "distinctTopFindings": [
+        "Singapore SFA: Prohibited therapeutic claim (\"Boosts Immunity\") on front of pack",
+        "Undeclared or unbolded mandatory allergens (Crustacean (Shrimp / Prawn), Tree Nuts (Candlenut), Soybean)",
+        "Nutrition table missing mandatory Per 100g column & Salt Equivalent (食塩相当量 3.94 g / 100g)"
+      ]
+    },
+    "check2": {
+      "pass": true
+    },
+    "check3": {
+      "pass": true,
+      "sgRowTextAfterFix": "Singapore (SFA)\nCleared for Export\n100% (0 critical, 0 warning)\nTop finding: All statutory requirements met — ready to print & ship\nActive Corridor"
+    },
+    "check4": {
+      "pass": true,
+      "gridAfterSideBySide": {
+        "gridTemplateColumns": "345px 345px",
+        "scrollWidth": 1440
+      },
+      "gridAfterFocus": {
+        "gridTemplateColumns": "714px",
+        "scrollWidth": 1440
+      }
+    },
+    "check5": {
+      "pass": true,
+      "txtFilename": "bali-crispy-prawn-candlenut-sambal-sg_sfa-report.txt",
+      "txtBanner": "Downloaded customs inspection report (.txt).",
+      "txtLength": 4889
+    },
+    "check6_mobile": {
+      "pass": true,
+      "scrollWidth": 390,
+      "originOrder": "-1"
+    },
+    "check6": {
+      "pass": true
+    }
+  },
+  "sprint01Edges": {
+    "edge1": {
+      "pass": true,
+      "matrixCountWhenCleared": 0,
+      "matrixVisibleAfterReloadSku": true
+    },
+    "edge2": {
+      "pass": true
+    }
+  },
+  "extraEdgeProbes": {
+    "persistencePass": true,
+    "hugeInputNoOverflow": true,
+    "zoom200NoOverflow": true,
+    "slowNetworkLoadingStateText": "Checking Japan CAA rules..."
+  },
+  "consoleErrors": [],
+  "badRequests": []
+}
